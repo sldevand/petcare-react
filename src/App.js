@@ -5,7 +5,8 @@ import { Container } from '@material-ui/core';
 
 class App extends React.Component {
   state = {
-    step: 'subscribe'
+    step: 'login',
+    title: 'PetCare'
   };
 
   handleSignupClick() {
@@ -15,13 +16,23 @@ class App extends React.Component {
     this.setState(state);
   }
 
+  cancelSuscribe() {
+    let state = {
+      step: 'login'
+    };
+    this.setState(state);
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <NavBar />
+          <NavBar title={this.state.title}/>
           <Container>
-            <MainFragment step={this.state.step} handleSignupClick={() => this.handleSignupClick()} />
+            <MainFragment
+              step={this.state.step}
+              handleSignupClick={() => this.handleSignupClick()}
+              cancelSubscribe={() => this.cancelSuscribe()} />
           </Container>
         </header>
       </div>

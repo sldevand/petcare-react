@@ -19,11 +19,6 @@ const useStyles = theme => ({
 });
 
 class NavBar extends React.Component {
-
-  state = {
-    title: "PetCare"
-  }
-
   render() {
     const { classes } = this.props;
     return (
@@ -32,7 +27,7 @@ class NavBar extends React.Component {
           <Toolbar>
             <SimpleMenu />
             <Typography variant="h6" className={classes.title}>
-              {this.state.title}
+              {this.props.title}
             </Typography>
             <Button color="inherit">Login</Button>
           </Toolbar>

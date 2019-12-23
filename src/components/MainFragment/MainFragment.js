@@ -15,10 +15,9 @@ class MainFragment extends React.Component {
             case 'login':
                 return <LoginForm handleSignupClick={this.props.handleSignupClick} />;
             case 'subscribe':
-                return <SubscribeForm />;
+                return <SubscribeForm cancelSubscribe={this.props.cancelSubscribe}/>;
             default:
                 return <LoginForm />
-
         }
     }
 

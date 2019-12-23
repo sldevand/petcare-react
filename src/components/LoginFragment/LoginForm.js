@@ -1,9 +1,9 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import UserForm from './UserForm';
 
 const useStyles = theme => ({
     root: {
@@ -20,40 +20,20 @@ const useStyles = theme => ({
     }
 });
 
-class LoginForm extends React.Component {
+class LoginForm extends UserForm {
 
     state = {
         email: '',
-        password: '',
-        repeatPassword: ''
+        password: ''
     };
-
-    handleEmailChange = (event) => {
-        const email = event.target.value;
-        this.setState({ email });
-    }
-
-    handlePasswordChange = (event) => {
-        const password = event.target.value;
-        this.setState({ password });
-    }
 
     handleSubmit = () => {
         console.log(this.state);
     }
 
-    componentDidMount() {
-        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-            if (value !== this.state.password) {
-                return false;
-            }
-            return true;
-        });
-    }
-
     render() {
         const { classes } = this.props;
-        const { email, password, repeatPassword } = this.state;
+        const { email, password } = this.state;
         return (
             <React.Fragment>
                 <Grid container direction="column" justify="center" alignItems="center">
@@ -79,8 +59,8 @@ class LoginForm extends React.Component {
                             onChange={this.handlePasswordChange}
                             name="password"
                             type="password"
-                            validators={['required']}
-                            errorMessages={['this field is required']}
+                            validators={['required', 'minNumber:8']}
+                            errorMessages={['this field is required', 'Between 8 and 255']}
                             value={password}
                         />
 

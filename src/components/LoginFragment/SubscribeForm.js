@@ -1,8 +1,8 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
+import UserForm from './UserForm';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 const useStyles = theme => ({
@@ -13,14 +13,14 @@ const useStyles = theme => ({
         },
     },
     button: {
-        margin: theme.spacing(4)
+        marginLeft: theme.spacing(4)
     },
     spacer: {
         margin: theme.spacing(4)
     }
 });
 
-class SubscribeForm extends React.Component {
+class SubscribeForm extends UserForm {
 
     state = {
         email: '',
@@ -29,6 +29,10 @@ class SubscribeForm extends React.Component {
         password: '',
         repeatPassword: ''
     };
+
+    handleSubmit = () => {
+        console.log(this.state);
+    }
 
     componentDidMount() {
         ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
@@ -39,9 +43,14 @@ class SubscribeForm extends React.Component {
         });
     }
 
-    handlePasswordChange = (event) => {
-        const password = event.target.value;
-        this.setState({ password });
+    handleFirstNameChange = (event) => {
+        const firstName = event.target.value;
+        this.setState({ firstName });
+    }
+
+    handleLastNameChange = (event) => {
+        const lastName = event.target.value;
+        this.setState({ lastName });
     }
 
     handleRepeatPasswordChange = (event) => {
@@ -51,7 +60,7 @@ class SubscribeForm extends React.Component {
 
     render() {
         const { classes } = this.props;
-        const { email, firstName, lastName,password, repeatPassword } = this.state;
+        const { email, firstName, lastName, password, repeatPassword } = this.state;
         return (
             <React.Fragment>
                 <Grid container direction="column" justify="center" alignItems="center">
@@ -74,19 +83,19 @@ class SubscribeForm extends React.Component {
 
                         <TextValidator
                             label="First name"
-                            onChange={this.handleEmailChange}
+                            onChange={this.handleFirstNameChange}
                             name="firstName"
                             value={firstName}
-                            validators={['required']}
+                            validators={['required', 'minNumber:3', 'maxNumber:64', 'matchRegexp:^[a-zA-Z-]$']}
                             errorMessages={['this field is required']}
                         />
 
                         <TextValidator
                             label="Last Name"
-                            onChange={this.handleEmailChange}
+                            onChange={this.handleLastNameChange}
                             name="lastName"
-                            value={email}
-                            validators={['required']}
+                            value={lastName}
+                            validators={['required', 'minNumber:3', 'maxNumber:64', 'matchRegexp:^[a-zA-Z-]$']}
                             errorMessages={['this field is required']}
                         />
 
@@ -95,7 +104,7 @@ class SubscribeForm extends React.Component {
                             onChange={this.handlePasswordChange}
                             name="password"
                             type="password"
-                            validators={['required']}
+                            validators={['required', 'minNumber:8', 'maxNumber:255']}
                             errorMessages={['this field is required']}
                             value={password}
                         />
@@ -105,12 +114,14 @@ class SubscribeForm extends React.Component {
                             onChange={this.handleRepeatPasswordChange}
                             name="repeatPassword"
                             type="password"
-                            validators={['isPasswordMatch', 'required']}
+                            validators={['isPasswordMatch', 'required', 'minNumber:8', 'maxNumber:255']}
                             errorMessages={['password mismatch', 'this field is required']}
                             value={repeatPassword}
                         />
-                        <Grid container direction="row" justify="center">
-                            <Button variant="contained" color="primary">Sign Up</Button>
+
+                        <Grid container direction="row" justify="center" spacing={4}>
+                            <Grid item><Button variant="outlined" color="secondary" onClick={this.props.cancelSubscribe}>Cancel</Button></Grid>
+                            <Grid item><Button variant="contained" color="primary">Signup</Button></Grid>
                         </Grid>
                     </ValidatorForm>
                 </Grid>
