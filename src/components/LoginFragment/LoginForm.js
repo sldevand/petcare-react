@@ -38,11 +38,6 @@ class LoginForm extends React.Component {
         this.setState({ password });
     }
 
-    handleRepeatPasswordChange = (event) => {
-        const repeatPassword = event.target.value;
-        this.setState({ repeatPassword });
-    }
-
     handleSubmit = () => {
         console.log(this.state);
     }
@@ -89,15 +84,6 @@ class LoginForm extends React.Component {
                             value={password}
                         />
 
-                        <TextValidator
-                            label="Repeat password"
-                            onChange={this.handleRepeatPasswordChange}
-                            name="repeatPassword"
-                            type="password"
-                            validators={['isPasswordMatch', 'required']}
-                            errorMessages={['password mismatch', 'this field is required']}
-                            value={repeatPassword}
-                        />
                         <Grid container direction="row" justify="center">
                             <Button type="submit" variant="contained" color="primary">Sign In</Button>
                         </Grid>

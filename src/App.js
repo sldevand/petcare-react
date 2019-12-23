@@ -5,7 +5,7 @@ import { Container } from '@material-ui/core';
 
 class App extends React.Component {
   state = {
-    step: 'login'
+    step: 'subscribe'
   };
 
   handleSignupClick() {
