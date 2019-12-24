@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import UserForm from './UserForm';
+import PasswordField from '../Fields/PasswordField';
 
 const useStyles = theme => ({
     root: {
@@ -37,7 +38,7 @@ class LoginForm extends UserForm {
         return (
             <React.Fragment>
                 <Grid container direction="column" justify="center" alignItems="center">
-                    <h1>Welcome</h1>
+                    <h1>Log In</h1>
 
                     <ValidatorForm
                         className={classes.root}
@@ -54,23 +55,18 @@ class LoginForm extends UserForm {
                             errorMessages={['this field is required', 'email is not valid']}
                         />
 
-                        <TextValidator
-                            label="Password"
-                            onChange={this.handlePasswordChange}
-                            name="password"
-                            type="password"
-                            validators={['required', 'minNumber:8']}
-                            errorMessages={['this field is required', 'Between 8 and 255']}
+                        <PasswordField
+                            handleChange={this.handlePasswordChange}
                             value={password}
                         />
 
                         <Grid container direction="row" justify="center">
-                            <Button type="submit" variant="contained" color="primary">Sign In</Button>
+                            <Button type="submit" variant="contained" color="primary">Log In</Button>
                         </Grid>
                     </ValidatorForm>
                     <div className={classes.spacer}>No Account ?</div>
                     <Button variant="outlined" color="secondary" onClick={() => this.props.handleSignupClick()}>
-                        Sign Up
+                        Sign In
                     </Button>
                 </Grid>
             </React.Fragment>

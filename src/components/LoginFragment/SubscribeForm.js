@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import UserForm from './UserForm';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import PasswordField from '../Fields/PasswordField';
 
 const useStyles = theme => ({
     root: {
@@ -13,7 +14,7 @@ const useStyles = theme => ({
         },
     },
     button: {
-        marginLeft: theme.spacing(4)
+        margin: theme.spacing(4)
     },
     spacer: {
         margin: theme.spacing(4)
@@ -64,7 +65,7 @@ class SubscribeForm extends UserForm {
         return (
             <React.Fragment>
                 <Grid container direction="column" justify="center" alignItems="center">
-                    <h1>Subscribe</h1>
+                    <h1>Sign Up</h1>
 
                     <ValidatorForm
                         className={classes.root}
@@ -99,14 +100,9 @@ class SubscribeForm extends UserForm {
                             errorMessages={['this field is required']}
                         />
 
-                        <TextValidator
-                            label="Password"
-                            onChange={this.handlePasswordChange}
-                            name="password"
-                            type="password"
-                            validators={['required', 'minNumber:8', 'maxNumber:255']}
-                            errorMessages={['this field is required']}
-                            value={password}
+                        <PasswordField
+                            handleChange={this.handlePasswordChange}
+                            value={password} 
                         />
 
                         <TextValidator
