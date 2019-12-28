@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SimpleMenu from './SimpleMenu';
 import { Link } from 'react-router-dom';
+import MainIcon from './../Icons/MainIcon';
+import { SvgIcon } from '@material-ui/core';
 
 const useStyles = theme => ({
   root: {
@@ -16,7 +18,9 @@ const useStyles = theme => ({
   },
   title: {
     flexGrow: 1,
-    textDecoration: 'none'
+    textDecoration: 'none',
+    marginLeft: theme.spacing(2),
+
   },
 });
 
@@ -28,8 +32,9 @@ class NavBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <SimpleMenu />
-            <Typography variant="h6" className={classes.title} color="inherit" component={Link} to="/" >
+            <SimpleMenu /> 
+            <SvgIcon component={MainIcon} viewBox="0 0 476 476" />
+            <Typography variant="h6" className={classes.title} color="inherit" component={Link} to="/" >             
               {title}
             </Typography>
             <Button color="inherit" component={Link} to="/login">
