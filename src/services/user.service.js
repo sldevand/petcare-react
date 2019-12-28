@@ -1,4 +1,4 @@
-import {api} from './api.service';
+import { api } from './api.service';
 
 export const userActions = {
     login,
@@ -13,6 +13,10 @@ async function login(email, password) {
             password: password
         }
     );
+
+    if (response.apiKey) {
+        localStorage.setItem('apiKey', response.apiKey);
+    }
 
     return returnState(response);
 }
@@ -31,7 +35,7 @@ async function subscribe(email, firstName, lastName, password) {
     return returnState(response);
 }
 
-function returnState(json){
+function returnState(json) {
     if (json.status === 1 && json.message) {
         return {
             success: true,

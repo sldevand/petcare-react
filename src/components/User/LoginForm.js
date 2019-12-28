@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import UserForm from './UserForm';
 import MessageSnackBar from '../Message/MessageSnackBar';
-import {userActions} from '../../services/user.service'
+import {userActions} from '../../services/user.service';
 
 const useStyles = theme => ({
     root: {
@@ -29,6 +29,12 @@ class LoginForm extends UserForm {
         password: '',
         open: false
     };
+
+    componentWillMount() {
+        if(localStorage.getItem('apiKey')){
+            this.props.history.push(`/`);
+        }
+    }
 
     handleSubmit = (event) => {
         event.preventDefault();
