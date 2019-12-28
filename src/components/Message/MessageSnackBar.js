@@ -78,15 +78,6 @@ MySnackbarContentWrapper.propTypes = {
 };
 
 export default function MessageSnackBar(props) {
-    const [open, setOpen] = React.useState(true);
-
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
 
     return (
         <div>
@@ -95,12 +86,12 @@ export default function MessageSnackBar(props) {
                     vertical: 'bottom',
                     horizontal: 'center',
                 }}
-                open={open}
+                open={props.open}
                 autoHideDuration={6000}
-                onClose={handleClose}
+                onClose={props.onClose}
             >
                 <MySnackbarContentWrapper
-                    onClose={handleClose}
+                    onClose={props.onClose}
                     variant={props.variant}
                     message={props.message}
                 />

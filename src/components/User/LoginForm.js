@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import UserForm from './UserForm';
 import MessageSnackBar from '../Message/MessageSnackBar';
+import {userActions} from '../../services/user.service'
 
 const useStyles = theme => ({
     root: {
@@ -25,58 +26,29 @@ class LoginForm extends UserForm {
 
     state = {
         email: '',
-        password: ''
+        password: '',
+        open: false
     };
 
     handleSubmit = (event) => {
         event.preventDefault();
         const { email, password } = this.state;
 
-        fetch('http://petcare/user/login', {
-            method: 'POST',
-            body: JSON.stringify({
-                email: email,
-                password: password
-            }),
-        }).then((response) => {
-            return response.json();
-        }).then((json) => {
-            if (email === json.email) {
-                this.setState({
-                    success: true,
-                    message: json.message
-                });
-
-                return;
-            }
-
-            if (json.errors) {
-                this.setState({
-                    success: false,
-                    message: json.errors
-                });
-
-                return;
-            }
-        }).catch((error) => {
-            this.setState({
-                success: false,
-                message: error
+        userActions.login(email, password)
+            .then((state) => {
+                this.setState(state);
+            })
+            .catch((state) => {
+                this.setState(state);
             });
-        });
     }
 
     render() {
         const { classes } = this.props;
-        const { email, password, success, message } = this.state;
-        let snackBar = '';
+        const { email, password, success, message, open } = this.state;
 
-
-        if (!success) {
-            snackBar = message ? <MessageSnackBar variant="error" message={message} /> : '';
-        } else {
-            snackBar = message ? <MessageSnackBar variant="success" message={message} /> : '';
-        }
+        let variant = success ? 'success' : 'error';
+        let snackBar = <MessageSnackBar variant={variant} message={message} open={open} onClose={() => { this.setState({ open: false }) }} />
 
         return (
             <Grid container direction="column" justify="center" alignItems="center">
