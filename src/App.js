@@ -1,43 +1,32 @@
 import React from 'react';
 import NavBar from './components/NavBar/NavBar';
-import MainFragment from './components/MainFragment/MainFragment';
-import { Container } from '@material-ui/core';
-import { SnackbarProvider } from 'notistack';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './components/Home';
+import SubscribeForm from './components/User/SubscribeForm';
+import LoginForm from './components/User/LoginForm';
 
 class App extends React.Component {
   state = {
-    step: 'subscribe',
     title: 'PetCare'
   };
 
-  handleSignupClick() {
-    this.setState({
-      step: 'subscribe'
-    });
-  }
-
-  cancelSuscribe() {
-    this.setState({
-      step: 'login'
-    });
-  }
-
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <NavBar title={this.state.title} />
-          <Container>
-            <SnackbarProvider maxSnack={3}>
-              <MainFragment
-                step={this.state.step}
-                handleSignupClick={() => this.handleSignupClick()}
-                cancelSubscribe={() => this.cancelSuscribe()} />
-            </SnackbarProvider>
-          </Container>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <NavBar title={this.state.title} />
+          </header>
 
-        </header>
-      </div>
+          <Switch>
+            <Route path="/" exact render={(props) => <Home title={this.state.title} />} />
+            <Route path="/subscribe" component={SubscribeForm} />
+            <Route path="/login" component={LoginForm} />
+          </Switch>
+
+        </div>
+      </Router>
+
     );
   }
 }

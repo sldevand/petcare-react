@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import UserForm from './UserForm';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import MessageSnackBar from '../Message/MessageSnackBar';
+import { Link } from 'react-router-dom';
 
 const useStyles = theme => ({
     root: {
@@ -58,10 +59,24 @@ class SubscribeForm extends UserForm {
                     success: true,
                     message: json.message
                 });
+
+                return;
+            }
+
+            if(json.errors){
+                this.setState({   
+                    success: false,
+                    message: json.errors
+                });
+
+                return;
             }
 
         }).catch((error) => {
-            console.error(error)
+            this.setState({   
+                success: false,
+                message: error
+            });
         });
     }
 
@@ -76,16 +91,18 @@ class SubscribeForm extends UserForm {
 
     render() {
         const { classes } = this.props;
-        const { email, firstName, lastName, password, repeatPassword, success } = this.state;
+        const { email, firstName, lastName, password, repeatPassword, success, message } = this.state;
 
         let validatorForm = '';
+        let errorSnackBar='';
         if (!success) {
+            errorSnackBar = message ? errorSnackBar = <MessageSnackBar variant="error" message={message}></MessageSnackBar> : '';
             validatorForm =
                 <ValidatorForm
                     className={classes.root}
                     ref="form"
                     onSubmit={this.handleSubmit}
-                    onError={errors => console.error(errors)}
+                    onError={(err)=>{console.error(err)}}
                 >
                     <TextValidator
                         label="Email"
@@ -135,26 +152,24 @@ class SubscribeForm extends UserForm {
                     />
 
                     <Grid container direction="row" justify="center" spacing={4}>
-                        <Grid item><Button variant="outlined" color="secondary" onClick={this.props.cancelSubscribe}>Back</Button></Grid>
                         <Grid item><Button type="submit" variant="contained" color="primary" >Sign Up</Button></Grid>
                     </Grid>
                 </ValidatorForm>
         } else {
             validatorForm =
-                <Grid container direction="row" justify="center" >
+                <Grid container direction="column" justify="center" alignItems="center">
                     <h3>{this.state.message}</h3>
-                    <Grid item><Button variant="outlined" color="secondary" onClick={this.props.cancelSubscribe}>Back to Login</Button></Grid>
+                    <Grid item><Button variant="outlined" color="secondary" component={Link} to="/login">Login</Button></Grid>
                     <MessageSnackBar variant="success" message={this.state.message}></MessageSnackBar>
                 </Grid>
         }
 
         return (
-            <React.Fragment>
-                <Grid container direction="column" justify="center" alignItems="center">
-                    <h1>Sign Up</h1>
-                    {validatorForm}
-                </Grid>
-            </React.Fragment>
+            <Grid container direction="column" justify="center" alignItems="center">
+                <h1>Sign Up</h1>
+                {validatorForm}
+                {errorSnackBar}
+            </Grid>
         );
     }
 }

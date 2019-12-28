@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SimpleMenu from './SimpleMenu';
+import { Link } from 'react-router-dom';
 
 const useStyles = theme => ({
   root: {
@@ -15,21 +16,25 @@ const useStyles = theme => ({
   },
   title: {
     flexGrow: 1,
+    textDecoration: 'none'
   },
 });
 
 class NavBar extends React.Component {
   render() {
     const { classes } = this.props;
+    const { title } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
             <SimpleMenu />
-            <Typography variant="h6" className={classes.title}>
-              {this.props.title}
+            <Typography variant="h6" className={classes.title} color="inherit" component={Link} to="/" >
+              {title}
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" component={Link} to="/login">
+              Login
+            </Button>
           </Toolbar>
         </AppBar>
       </div>
