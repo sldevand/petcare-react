@@ -2,38 +2,40 @@ import React from 'react';
 import NavBar from './components/NavBar/NavBar';
 import MainFragment from './components/MainFragment/MainFragment';
 import { Container } from '@material-ui/core';
+import { SnackbarProvider } from 'notistack';
 
 class App extends React.Component {
   state = {
-    step: 'login',
+    step: 'subscribe',
     title: 'PetCare'
   };
 
   handleSignupClick() {
-    let state = {
+    this.setState({
       step: 'subscribe'
-    };
-    this.setState(state);
+    });
   }
 
   cancelSuscribe() {
-    let state = {
+    this.setState({
       step: 'login'
-    };
-    this.setState(state);
+    });
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <NavBar title={this.state.title}/>
+          <NavBar title={this.state.title} />
           <Container>
-            <MainFragment
-              step={this.state.step}
-              handleSignupClick={() => this.handleSignupClick()}
-              cancelSubscribe={() => this.cancelSuscribe()} />
+            <SnackbarProvider maxSnack={3}>
+              <MainFragment
+                step={this.state.step}
+                handleSignupClick={() => this.handleSignupClick()}
+                cancelSubscribe={() => this.cancelSuscribe()} />
+            </SnackbarProvider>
           </Container>
+
         </header>
       </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
-import LoginForm from '../LoginFragment/LoginForm';
-import SubscribeForm from '../LoginFragment/SubscribeForm';
-
+import LoginForm from '../User/LoginForm';
+import SubscribeForm from '../User/SubscribeForm';
+import ErrorPage from '../Error/ErrorPage'
 
 class MainFragment extends React.Component {
 
@@ -15,9 +15,11 @@ class MainFragment extends React.Component {
             case 'login':
                 return <LoginForm handleSignupClick={this.props.handleSignupClick} />;
             case 'subscribe':
-                return <SubscribeForm cancelSubscribe={this.props.cancelSubscribe}/>;
+                return <SubscribeForm cancelSubscribe={this.props.cancelSubscribe} />;
+            case 'subscribe_success':
+                    return <SubscribeForm cancelSubscribe={this.props.cancelSubscribe} />;
             default:
-                return <LoginForm />
+                return <ErrorPage />
         }
     }
 

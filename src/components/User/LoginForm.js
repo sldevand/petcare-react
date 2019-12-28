@@ -27,8 +27,23 @@ class LoginForm extends UserForm {
         password: ''
     };
 
-    handleSubmit = () => {
-        console.log(this.state);
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const { email, password } = this.state;
+
+        fetch('http://petcare/user/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: email,
+                password: password
+            }),
+        }).then((response) => {
+            return response.json();
+        }).then((json) => {
+            console.log(json)
+        }).catch((error) => {
+            console.error(error)
+        });
     }
 
     render() {
@@ -43,11 +58,11 @@ class LoginForm extends UserForm {
                         className={classes.root}
                         ref="form"
                         onSubmit={this.handleSubmit}
-                        onError={errors => console.log(errors)}
+                        onError={errors => console.error(errors)}
                     >
                         <TextValidator
                             label="Email"
-                            onChange={this.handleEmailChange}
+                            onChange={this.handleChange}
                             name="email"
                             value={email}
                             validators={['required', 'isEmail']}
@@ -56,11 +71,11 @@ class LoginForm extends UserForm {
 
                         <TextValidator
                             label="Password"
-                            onChange={this.handlePasswordChange}
+                            onChange={this.handleChange}
                             name="password"
                             type="password"
-                            validators={['required', 'minNumber:8', 'maxNumber:255']}
-                            errorMessages={['this field is required', 'Between 8 and 255']}
+                            validators={['required', 'minStringLength:8', 'maxStringLength:255']}
+                            errorMessages={['this field is required', 'Minimum 8 characters', 'Maximum 255 characters']}
                             value={password}
                         />
 
@@ -70,7 +85,7 @@ class LoginForm extends UserForm {
                     </ValidatorForm>
                     <div className={classes.spacer}>No Account ?</div>
                     <Button variant="outlined" color="secondary" onClick={() => this.props.handleSignupClick()}>
-                        Sign In
+                        Sign Up
                     </Button>
                 </Grid>
             </React.Fragment>
