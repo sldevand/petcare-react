@@ -1,12 +1,13 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import UserForm from './UserForm';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import MessageSnackBar from '../Message/MessageSnackBar';
-import { userService } from '../../services/user.service';
 import { Link } from 'react-router-dom';
+import { signupActions } from '../../redux';
 
 const useStyles = theme => ({
     root: {
@@ -30,22 +31,8 @@ class SubscribeForm extends UserForm {
         firstName: '',
         lastName: '',
         password: '',
-        repeatPassword: '',
-        open: false
+        repeatPassword: ''
     };
-
-    handleSubmit = (event) => {
-        event.preventDefault();
-        const { email, firstName, lastName, password } = this.state;
-
-        userService.subscribe(email, firstName, lastName, password)
-            .then((state) => {
-                this.setState(state);
-            })
-            .catch((state) => {
-                this.setState(state);
-            });
-    }
 
     componentDidMount() {
         ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
@@ -57,18 +44,16 @@ class SubscribeForm extends UserForm {
     }
 
     render() {
-        const { classes } = this.props;
-        const { email, firstName, lastName, password, repeatPassword, success, message,open } = this.state;
+        const { classes, success, message } = this.props;
+        const { email, firstName, lastName, password, repeatPassword } = this.state;
 
-        let variant = success ? 'success' : 'error';
-        let snackBar = <MessageSnackBar variant={variant} message={message} open={open} onClose={() => { this.setState({ open: false }) }} />
         let validatorForm = '';
         if (!success) {
             validatorForm =
                 <ValidatorForm
                     className={classes.root}
                     ref="form"
-                    onSubmit={this.handleSubmit}
+                    onSubmit={() => {this.props.signup(this.state.email,this.state.firstName,this.state.lastName,this.state.password)}}
                     onError={(err) => { console.error(err) }}
                 >
                     <TextValidator
@@ -125,7 +110,7 @@ class SubscribeForm extends UserForm {
         } else {
             validatorForm =
                 <Grid container direction="column" justify="center" alignItems="center">
-                    <h3>{this.state.message}</h3>
+                    <h3>{message}</h3>
                     <Grid item><Button variant="outlined" color="secondary" component={Link} to="/login">Login</Button></Grid>
                 </Grid>
         }
@@ -134,10 +119,26 @@ class SubscribeForm extends UserForm {
             <Grid container direction="column" justify="center" alignItems="center">
                 <h1>Sign Up</h1>
                 {validatorForm}
-                {snackBar}
             </Grid>
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        success: state.signupReducer.success,
+        message: state.signupReducer.message
+    };
+}
 
-export default withStyles(useStyles)(SubscribeForm);
+const mapDispatchToProps = dispatch => {
+    return {
+        signup: (email, firstName, lastName, password) => {
+            dispatch(signupActions.signup(email, firstName, lastName, password))
+        }
+    }
+}
+
+export default compose(
+    withStyles(useStyles),
+    connect(mapStateToProps, mapDispatchToProps)
+)(SubscribeForm);

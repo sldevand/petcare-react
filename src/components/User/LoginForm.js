@@ -1,11 +1,12 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import UserForm from './UserForm';
-import MessageSnackBar from '../Message/MessageSnackBar';
-import {userService} from '../../services/user.service';
+import { loginActions } from '../../redux';
 
 const useStyles = theme => ({
     root: {
@@ -26,35 +27,18 @@ class LoginForm extends UserForm {
 
     state = {
         email: '',
-        password: '',
-        open: false
+        password: ''
     };
 
     componentWillMount() {
-        if(localStorage.getItem('apiKey')){
+        if (localStorage.getItem('apiKey')) {
             this.props.history.push(`/`);
         }
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        const { email, password } = this.state;
-
-        userService.login(email, password)
-            .then((state) => {
-                this.setState(state);
-            })
-            .catch((state) => {
-                this.setState(state);
-            });
-    }
-
     render() {
         const { classes } = this.props;
-        const { email, password, success, message, open } = this.state;
-
-        let variant = success ? 'success' : 'error';
-        let snackBar = <MessageSnackBar variant={variant} message={message} open={open} onClose={() => { this.setState({ open: false }) }} />
+        const { email, password } = this.state;
 
         return (
             <Grid container direction="column" justify="center" alignItems="center">
@@ -63,7 +47,7 @@ class LoginForm extends UserForm {
                 <ValidatorForm
                     className={classes.root}
                     ref="form"
-                    onSubmit={this.handleSubmit}
+                    onSubmit={() => this.props.login(email, password)}
                     onError={errors => console.error(errors)}
                 >
                     <TextValidator
@@ -89,10 +73,27 @@ class LoginForm extends UserForm {
                         <Button type="submit" variant="contained" color="primary">Log In</Button>
                     </Grid>
                 </ValidatorForm>
-                {snackBar}
             </Grid>
         );
     }
 }
 
-export default withStyles(useStyles)(LoginForm);
+const mapStateToProps = state => {
+    return {
+        success: state.loginReducer.success,
+        message: state.loginReducer.message
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        login: (email, password) => {
+            dispatch(loginActions.login(email, password))
+        }       
+    }
+}
+
+export default compose(
+    withStyles(useStyles),
+    connect(mapStateToProps, mapDispatchToProps)
+)(LoginForm);

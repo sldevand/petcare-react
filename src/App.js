@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import SubscribeForm from './components/User/SubscribeForm';
 import LoginForm from './components/User/LoginForm';
+import MessageSnackBar from './components/Message/MessageSnackBar';
 
 class App extends React.Component {
   state = {
@@ -23,7 +24,7 @@ class App extends React.Component {
             <Route path="/subscribe" component={SubscribeForm} />
             <Route path="/login" component={LoginForm} />
           </Switch>
-
+          <MessageSnackBar />
         </div>
       </Router>
 

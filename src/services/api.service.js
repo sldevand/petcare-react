@@ -15,7 +15,7 @@ async function handleRequest(method, endpoint, body=null) {
     let options = {
         method: method       
     }
-
+console.log(body);
     if(body) {
         options.body = JSON.stringify(body);
     }

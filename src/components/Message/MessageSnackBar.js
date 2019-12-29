@@ -11,6 +11,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { snackbarActions } from '../../redux';
 
 const variantIcon = {
     success: CheckCircleIcon,
@@ -77,8 +79,7 @@ MySnackbarContentWrapper.propTypes = {
     variant: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
 };
 
-export default function MessageSnackBar(props) {
-
+function MessageSnackBar(props) {
     return (
         <div>
             <Snackbar
@@ -99,3 +100,19 @@ export default function MessageSnackBar(props) {
         </div>
     );
 }
+
+const mapStateToProps = state => {
+    return {
+        variant: state.snackbarReducer.variant,
+        message: state.snackbarReducer.message,
+        open: state.snackbarReducer.open
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onClose: () => {dispatch(snackbarActions.close())}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessageSnackBar);

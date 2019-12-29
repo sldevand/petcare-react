@@ -1,10 +1,5 @@
 import { api } from './api.service';
 
-export const userService = {
-    login,
-    subscribe
-};
-
 async function login(email, password) {
     let response = await api.handlePost(
         'user/login',
@@ -18,7 +13,7 @@ async function login(email, password) {
         localStorage.setItem('apiKey', response.apiKey);
     }
 
-    return returnState(response);
+    return response;
 }
 
 async function subscribe(email, firstName, lastName, password) {
@@ -32,23 +27,10 @@ async function subscribe(email, firstName, lastName, password) {
         }
     );
 
-    return returnState(response);
+    return response;
 }
 
-function returnState(json) {
-    if (json.status === 1 && json.message) {
-        return {
-            success: true,
-            message: json.message,
-            open: true
-        };
-    }
-
-    if (json.status === 0 && json.errors) {
-        return {
-            success: false,
-            message: json.errors,
-            open: true
-        };
-    }
-}
+export const userService = {
+    login,
+    subscribe
+};
