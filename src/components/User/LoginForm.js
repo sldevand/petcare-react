@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import UserForm from './UserForm';
 import MessageSnackBar from '../Message/MessageSnackBar';
-import {userActions} from '../../services/user.service';
+import {userService} from '../../services/user.service';
 
 const useStyles = theme => ({
     root: {
@@ -40,7 +40,7 @@ class LoginForm extends UserForm {
         event.preventDefault();
         const { email, password } = this.state;
 
-        userActions.login(email, password)
+        userService.login(email, password)
             .then((state) => {
                 this.setState(state);
             })

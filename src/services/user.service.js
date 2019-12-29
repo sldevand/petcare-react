@@ -1,6 +1,6 @@
 import { api } from './api.service';
 
-export const userActions = {
+export const userService = {
     login,
     subscribe
 };

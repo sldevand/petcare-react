@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import UserForm from './UserForm';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import MessageSnackBar from '../Message/MessageSnackBar';
-import { userActions } from '../../services/user.service';
+import { userService } from '../../services/user.service';
 import { Link } from 'react-router-dom';
 
 const useStyles = theme => ({
@@ -38,7 +38,7 @@ class SubscribeForm extends UserForm {
         event.preventDefault();
         const { email, firstName, lastName, password } = this.state;
 
-        userActions.subscribe(email, firstName, lastName, password)
+        userService.subscribe(email, firstName, lastName, password)
             .then((state) => {
                 this.setState(state);
             })
