@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import UserForm from './UserForm';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import MessageSnackBar from '../Message/MessageSnackBar';
+import { userActions } from '../../services/user.service';
 import { Link } from 'react-router-dom';
 
 const useStyles = theme => ({
@@ -30,54 +31,20 @@ class SubscribeForm extends UserForm {
         lastName: '',
         password: '',
         repeatPassword: '',
-        success: false,
-        message: ''
+        open: false
     };
 
     handleSubmit = (event) => {
         event.preventDefault();
         const { email, firstName, lastName, password } = this.state;
 
-        fetch('http://petcare/user/subscribe', {
-            method: 'POST',
-            body: JSON.stringify({
-                "email": email,
-                "firstName": firstName,
-                "lastName": lastName,
-                "password": password
-            }),
-        }).then((response) => {
-            return response.json();
-        }).then((json) => {
-            if (email === json.email) {
-                this.setState({
-                    email: '',
-                    firstName: '',
-                    lastName: '',
-                    password: '',
-                    repeatPassword: '',
-                    success: true,
-                    message: json.message
-                });
-
-                return;
-            }
-
-            if(json.errors){
-                this.setState({   
-                    success: false,
-                    message: json.errors
-                });
-
-                return;
-            }
-
-        }).catch((error) => {
-            this.setState({   
-                success: false,
-                message: error
+        userActions.subscribe(email, firstName, lastName, password)
+            .then((state) => {
+                this.setState(state);
+            })
+            .catch((state) => {
+                this.setState(state);
             });
-        });
     }
 
     componentDidMount() {
@@ -91,18 +58,18 @@ class SubscribeForm extends UserForm {
 
     render() {
         const { classes } = this.props;
-        const { email, firstName, lastName, password, repeatPassword, success, message } = this.state;
+        const { email, firstName, lastName, password, repeatPassword, success, message,open } = this.state;
 
+        let variant = success ? 'success' : 'error';
+        let snackBar = <MessageSnackBar variant={variant} message={message} open={open} onClose={() => { this.setState({ open: false }) }} />
         let validatorForm = '';
-        let errorSnackBar='';
         if (!success) {
-            errorSnackBar = message ? errorSnackBar = <MessageSnackBar variant="error" message={message}></MessageSnackBar> : '';
             validatorForm =
                 <ValidatorForm
                     className={classes.root}
                     ref="form"
                     onSubmit={this.handleSubmit}
-                    onError={(err)=>{console.error(err)}}
+                    onError={(err) => { console.error(err) }}
                 >
                     <TextValidator
                         label="Email"
@@ -160,7 +127,6 @@ class SubscribeForm extends UserForm {
                 <Grid container direction="column" justify="center" alignItems="center">
                     <h3>{this.state.message}</h3>
                     <Grid item><Button variant="outlined" color="secondary" component={Link} to="/login">Login</Button></Grid>
-                    <MessageSnackBar variant="success" message={this.state.message}></MessageSnackBar>
                 </Grid>
         }
 
@@ -168,7 +134,7 @@ class SubscribeForm extends UserForm {
             <Grid container direction="column" justify="center" alignItems="center">
                 <h1>Sign Up</h1>
                 {validatorForm}
-                {errorSnackBar}
+                {snackBar}
             </Grid>
         );
     }

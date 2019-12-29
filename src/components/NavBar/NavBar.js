@@ -4,10 +4,15 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import SimpleMenu from './SimpleMenu';
+import SimpleDrawer from './SimpleDrawer';
 import { Link } from 'react-router-dom';
 import MainIcon from './../Icons/MainIcon';
 import { SvgIcon } from '@material-ui/core';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+
+
+
+
 
 const useStyles = theme => ({
   root: {
@@ -32,13 +37,16 @@ class NavBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <SimpleMenu /> 
+            <SimpleDrawer />
             <SvgIcon component={MainIcon} viewBox="0 0 476 476" />
-            <Typography variant="h6" className={classes.title} color="inherit" component={Link} to="/" >             
+            <Typography variant="h6" className={classes.title} color="inherit" >
               {title}
             </Typography>
             <Button color="inherit" component={Link} to="/login">
-              Login
+              <AccountBoxIcon />
+              <Typography variant="button" className={classes.title} color="inherit" >
+                Login
+              </Typography>
             </Button>
           </Toolbar>
         </AppBar>
