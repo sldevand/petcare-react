@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import UserForm from './UserForm';
 import { loginActions } from '../../redux';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = theme => ({
     root: {
@@ -20,6 +21,10 @@ const useStyles = theme => ({
     },
     spacer: {
         margin: theme.spacing(4)
+    },
+    paper: {
+        margin: theme.spacing(2),
+        padding : theme.spacing(2)
     }
 });
 
@@ -41,6 +46,7 @@ class LoginForm extends UserForm {
         const { email, password } = this.state;
 
         return (
+            <Paper className={classes.paper} elevation={3} >
             <Grid container direction="column" justify="center" alignItems="center">
                 <h1>Log In</h1>
 
@@ -74,6 +80,7 @@ class LoginForm extends UserForm {
                     </Grid>
                 </ValidatorForm>
             </Grid>
+            </Paper>
         );
     }
 }

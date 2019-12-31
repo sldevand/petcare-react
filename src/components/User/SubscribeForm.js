@@ -8,6 +8,7 @@ import UserForm from './UserForm';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
 import { signupActions } from '../../redux';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = theme => ({
     root: {
@@ -21,6 +22,10 @@ const useStyles = theme => ({
     },
     spacer: {
         margin: theme.spacing(4)
+    },
+    paper: {
+        margin: theme.spacing(2),
+        padding: theme.spacing(2)
     }
 });
 
@@ -53,7 +58,7 @@ class SubscribeForm extends UserForm {
                 <ValidatorForm
                     className={classes.root}
                     ref="form"
-                    onSubmit={() => {this.props.signup(this.state.email,this.state.firstName,this.state.lastName,this.state.password)}}
+                    onSubmit={() => { this.props.signup(this.state.email, this.state.firstName, this.state.lastName, this.state.password) }}
                     onError={(err) => { console.error(err) }}
                 >
                     <TextValidator
@@ -116,10 +121,12 @@ class SubscribeForm extends UserForm {
         }
 
         return (
-            <Grid container direction="column" justify="center" alignItems="center">
-                <h1>Sign Up</h1>
-                {validatorForm}
-            </Grid>
+            <Paper className={classes.paper} elevation={3} >
+                <Grid container direction="column" justify="center" alignItems="center">
+                    <h1>Sign Up</h1>
+                    {validatorForm}
+                </Grid>
+            </Paper>
         );
     }
 }
