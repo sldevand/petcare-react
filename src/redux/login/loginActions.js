@@ -22,6 +22,13 @@ const fetchLoginFailure = error => {
     }
 }
 
+const isLoggedInBuilder = loggedIn => {
+    return {
+        type: loginTypes.IS_LOGGED_IN,
+        loggedIn: loggedIn
+    }
+}
+
 const login = (email, password) => {
     return (dispatch) => {
         dispatch(fetchLoginRequest());
@@ -34,7 +41,11 @@ const login = (email, password) => {
                     return;
                 }
 
-                let loginSuccess = fetchLoginSuccess(response);
+                if (response.apiKey) {
+                    localStorage.setItem('apiKey', response.apiKey);
+                }
+                
+                let loginSuccess = fetchLoginSuccess(response);          
                 dispatch(loginSuccess);
                 dispatch(snackbarActions.open(loginSuccess.payload.message, 'success'));
             })
@@ -44,6 +55,17 @@ const login = (email, password) => {
     }
 }
 
+const isLoggedIn = () => {
+    return (dispatch) => {
+        if(localStorage.getItem('apiKey')){
+            dispatch(isLoggedInBuilder(true));
+        } else {
+            dispatch(isLoggedInBuilder(false));
+        }
+    }
+}
+
 export const loginActions = {
-    login
+    login,
+    isLoggedIn
 }

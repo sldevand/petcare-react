@@ -11,19 +11,27 @@ const loginReducer = (state = initialState, action) => {
             return {
                 ...state,
                 success: false,
-                message: ''
+                message: '',
+                loggedIn: false
             }
         case loginTypes.FETCH_LOGIN_SUCCESS:
             return {
                 ...state,
                 success: action.payload.status,
-                message: action.payload.message
+                message: action.payload.message,
+                loggedIn: true
             }
         case loginTypes.FETCH_LOGIN_FAILURE:
             return {
                 ...state,
                 success: action.payload.status,
-                message: action.payload.errors
+                message: action.payload.errors,
+                loggedIn: false
+            }
+        case loginTypes.IS_LOGGED_IN:
+            return {
+                ...state,
+                loggedIn: action.loggedIn
             }
         default: return state;
     }

@@ -24,7 +24,7 @@ const useStyles = theme => ({
     },
     paper: {
         margin: theme.spacing(2),
-        padding : theme.spacing(2)
+        padding: theme.spacing(2)
     }
 });
 
@@ -35,51 +35,49 @@ class LoginForm extends UserForm {
         password: ''
     };
 
-    componentWillMount() {
-        if (localStorage.getItem('apiKey')) {
-            this.props.history.push(`/`);
-        }
-    }
-
     render() {
         const { classes } = this.props;
         const { email, password } = this.state;
 
+        if (this.props.loggedIn === true) {
+            this.props.history.push(`/`);
+        }
+
         return (
             <Paper className={classes.paper} elevation={3} >
-            <Grid container direction="column" justify="center" alignItems="center">
-                <h1>Log In</h1>
+                <Grid container direction="column" justify="center" alignItems="center">
+                    <h1>Log In</h1>
 
-                <ValidatorForm
-                    className={classes.root}
-                    ref="form"
-                    onSubmit={() => this.props.login(email, password)}
-                    onError={errors => console.error(errors)}
-                >
-                    <TextValidator
-                        label="Email"
-                        onChange={this.handleChange}
-                        name="email"
-                        value={email}
-                        validators={['required', 'isEmail']}
-                        errorMessages={['this field is required', 'email is not valid']}
-                    />
+                    <ValidatorForm
+                        className={classes.root}
+                        ref="form"
+                        onSubmit={() => this.props.login(email, password)}
+                        onError={errors => console.error(errors)}
+                    >
+                        <TextValidator
+                            label="Email"
+                            onChange={this.handleChange}
+                            name="email"
+                            value={email}
+                            validators={['required', 'isEmail']}
+                            errorMessages={['this field is required', 'email is not valid']}
+                        />
 
-                    <TextValidator
-                        label="Password"
-                        onChange={this.handleChange}
-                        name="password"
-                        type="password"
-                        validators={['required', 'minStringLength:8', 'maxStringLength:255']}
-                        errorMessages={['this field is required', 'Minimum 8 characters', 'Maximum 255 characters']}
-                        value={password}
-                    />
+                        <TextValidator
+                            label="Password"
+                            onChange={this.handleChange}
+                            name="password"
+                            type="password"
+                            validators={['required', 'minStringLength:8', 'maxStringLength:255']}
+                            errorMessages={['this field is required', 'Minimum 8 characters', 'Maximum 255 characters']}
+                            value={password}
+                        />
 
-                    <Grid container direction="row" justify="center">
-                        <Button type="submit" variant="contained" color="primary">Log In</Button>
-                    </Grid>
-                </ValidatorForm>
-            </Grid>
+                        <Grid container direction="row" justify="center">
+                            <Button type="submit" variant="contained" color="primary">Log In</Button>
+                        </Grid>
+                    </ValidatorForm>
+                </Grid>
             </Paper>
         );
     }
@@ -88,7 +86,8 @@ class LoginForm extends UserForm {
 const mapStateToProps = state => {
     return {
         success: state.loginReducer.success,
-        message: state.loginReducer.message
+        message: state.loginReducer.message,
+        loggedIn: state.loginReducer.loggedIn
     };
 }
 
@@ -96,7 +95,10 @@ const mapDispatchToProps = dispatch => {
     return {
         login: (email, password) => {
             dispatch(loginActions.login(email, password))
-        }       
+        },
+        isLoggedIn: () => {
+            dispatch(loginActions.isLoggedIn())
+        }
     }
 }
 

@@ -9,10 +9,6 @@ async function login(email, password) {
         }
     );
 
-    if (response.apiKey) {
-        localStorage.setItem('apiKey', response.apiKey);
-    }
-
     return response;
 }
 
