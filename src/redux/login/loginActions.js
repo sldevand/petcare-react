@@ -22,6 +22,12 @@ const fetchLoginFailure = error => {
     }
 }
 
+const logoutBuilder = () => {
+    return {
+        type: loginTypes.LOGOUT
+    }
+}
+
 const isLoggedInBuilder = loggedIn => {
     return {
         type: loginTypes.IS_LOGGED_IN,
@@ -41,8 +47,8 @@ const login = (email, password) => {
                     return;
                 }
 
-                if (response.apiKey) {
-                    localStorage.setItem('apiKey', response.apiKey);
+                if (response.data.apiKey) {
+                    localStorage.setItem('apiKey', response.data.apiKey);
                 }
                 
                 let loginSuccess = fetchLoginSuccess(response);          
@@ -52,6 +58,14 @@ const login = (email, password) => {
             .catch((response) => {
                 dispatch(fetchLoginFailure(response));
             })
+    }
+}
+
+const logout = () => {
+    return (dispatch) => {
+       localStorage.removeItem('apiKey');
+       dispatch(logoutBuilder());
+       dispatch(snackbarActions.open('You have logged out!', 'success'));
     }
 }
 
@@ -67,5 +81,6 @@ const isLoggedIn = () => {
 
 export const loginActions = {
     login,
-    isLoggedIn
+    isLoggedIn,
+    logout
 }

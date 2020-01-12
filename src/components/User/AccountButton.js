@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
@@ -27,15 +28,17 @@ class AccountButton extends React.Component {
 
         let to='/login';
         let title='Login';
+        let icon=<ExitToAppIcon />
 
         if(this.props.loggedIn){
             to='/account';
             title='Account';
+            icon=<AccountBoxIcon />
         }        
 
         return (           
             <Button color="inherit" component={Link} to={to}>
-                <AccountBoxIcon />
+                {icon}
                 <Typography variant="button" className={classes.title} color="inherit" >
                     {title}
                 </Typography>

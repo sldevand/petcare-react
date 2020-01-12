@@ -1,24 +1,52 @@
 import config from './../config';
 
 export const api = {
-    handlePost
+    handlePost,
+    handleGet,
+    handleSecuredGet
 };
 
 async function handlePost(endpoint, body) {
-    let json = await handleRequest('POST', endpoint, body);
+    let json = await handleRequest('POST', endpoint, null, body);
 
-    return json;   
+    return json;
 }
 
-async function handleRequest(method, endpoint, body=null) {
+async function handleGet(endpoint) {
+    let json = await handleRequest('GET', endpoint);
+
+    return json;
+}
+
+async function handleSecuredGet(endpoint) {
+
+    const apiKey = localStorage.getItem('apiKey');
+
+
+    let headers = {
+        'Authorization':'Bearer ' + apiKey
+    }
+
+    let json = await handleRequest('GET', endpoint, headers);
+
+    return json;
+}
+
+async function handleRequest(method, endpoint, headers = null, body = null) {
 
     let options = {
-        method: method       
+        method: method
     }
-console.log(body);
-    if(body) {
+
+    if (body) {
         options.body = JSON.stringify(body);
     }
+
+    if (headers) {
+        options.headers = headers;
+    }
+
+console.log(options);
 
     let response = await fetch(`${config.apiUrl}/${endpoint}`, options);
     let json = await response.json();

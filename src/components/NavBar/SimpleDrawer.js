@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -11,8 +12,9 @@ import HomeIcon from '@material-ui/icons/Home';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = theme => ({
     list: {
         width: 250,
     },
@@ -21,51 +23,71 @@ const useStyles = makeStyles({
     },
 });
 
-export default function SimpleDrawer() {
-    const classes = useStyles();
-    const [state, setState] = React.useState({
-        left: false
-    });
+class SimpleDrawer extends React.Component {
+    state = {
+        side: "open"
+    };
 
-    const toggleDrawer = (side, open) => event => {
+    toggleDrawer = (side, open) => event => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
 
-        setState({ ...state, [side]: open });
+        this.setState({ ...this.state, [side]: open });
     };
 
-    const sideList = side => (
-        <div
-            className={classes.list}
-            role="presentation"
-            onClick={toggleDrawer(side, false)}
-            onKeyDown={toggleDrawer(side, false)}
-        >
-            <List>
-                <ListItem button key="Home" component={Link} to="/">
-                    <ListItemIcon><HomeIcon /></ListItemIcon>
-                    <ListItemText primary="Home" />
-                </ListItem>
-            </List>
-            <Divider />
-            <List>
+    render() {
+        const { classes } = this.props;
+
+        let signupItem = '';
+        if (!this.props.loggedIn) {
+            signupItem =
                 <ListItem button key="Sign Up" component={Link} to="/subscribe">
                     <ListItemIcon><AccountCircleIcon /></ListItemIcon>
                     <ListItemText primary="Sign Up" />
-                </ListItem>
-            </List>
-        </div>
-    );
+                </ListItem>;
+        }
 
-    return (
-        <div>
-            <IconButton aria-controls="simple-menu" aria-haspopup="true" edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer('left', true)}>
-                <MenuIcon />
-            </IconButton>
-            <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-                {sideList('left')}
-            </Drawer>
-        </div>
-    );
+        const sideList = side => (
+            <div
+                className={classes.list}
+                role="presentation"
+                onClick={this.toggleDrawer(side, false)}
+                onKeyDown={this.toggleDrawer(side, false)}
+            >
+                <List>
+                    <ListItem button key="Home" component={Link} to="/">
+                        <ListItemIcon><HomeIcon /></ListItemIcon>
+                        <ListItemText primary="Home" />
+                    </ListItem>
+                </List>
+                <Divider />
+                <List>
+                    {signupItem}
+                </List>
+            </div>
+        );
+
+        return (
+            <div>
+                <IconButton aria-controls="simple-menu" aria-haspopup="true" edge="start" color="inherit" aria-label="menu" onClick={this.toggleDrawer('left', true)}>
+                    <MenuIcon />
+                </IconButton>
+                <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
+                    {sideList('left')}
+                </Drawer>
+            </div>
+        );
+    }
 }
+
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.loginReducer.loggedIn
+    };
+}
+
+export default compose(
+    withStyles(useStyles),
+    connect(mapStateToProps)
+)(SimpleDrawer);

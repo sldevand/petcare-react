@@ -5,7 +5,7 @@ const initialState = {
     message: ''
 };
 
-const loginReducer = (state = initialState, action) => { 
+const loginReducer = (state = initialState, action) => {
     switch (action.type) {
         case loginTypes.FETCH_LOGIN_REQUEST:
             return {
@@ -32,6 +32,11 @@ const loginReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loggedIn: action.loggedIn
+            }
+        case loginTypes.LOGOUT:
+            return {
+                ...state,
+                loggedIn: false
             }
         default: return state;
     }

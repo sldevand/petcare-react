@@ -1,9 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import UserForm from './UserForm';
 import { loginActions } from '../../redux';
@@ -19,9 +19,6 @@ const useStyles = theme => ({
     button: {
         margin: theme.spacing(4)
     },
-    spacer: {
-        margin: theme.spacing(4)
-    },
     paper: {
         margin: theme.spacing(2),
         padding: theme.spacing(2)
@@ -35,6 +32,12 @@ class LoginForm extends UserForm {
         password: ''
     };
 
+    componentWillMount(){
+        if (this.props.loggedIn === true) {
+            this.props.history.push(`/`);
+        }
+    }
+
     render() {
         const { classes } = this.props;
         const { email, password } = this.state;
@@ -42,7 +45,7 @@ class LoginForm extends UserForm {
         if (this.props.loggedIn === true) {
             this.props.history.push(`/`);
         }
-
+       
         return (
             <Paper className={classes.paper} elevation={3} >
                 <Grid container direction="column" justify="center" alignItems="center">
