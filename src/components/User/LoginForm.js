@@ -32,7 +32,7 @@ class LoginForm extends UserForm {
         password: ''
     };
 
-    componentWillMount(){
+    componentWillMount() {
         if (this.props.loggedIn === true) {
             this.props.history.push(`/`);
         }
@@ -45,43 +45,52 @@ class LoginForm extends UserForm {
         if (this.props.loggedIn === true) {
             this.props.history.push(`/`);
         }
-       
+
         return (
-            <Paper className={classes.paper} elevation={3} >
-                <Grid container direction="column" justify="center" alignItems="center">
-                    <h1>Log In</h1>
+            <Grid container direction="row" justify="center" alignItems="center">
+                <Grid item xs={12} sm={10} md={8} lg={6} >
+                    <Paper className={classes.paper} elevation={3}>
+                        <Grid container direction="column" justify="center" alignItems="center">
+                            <Grid item xs={12}>
+                                <h1>Log In</h1>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <ValidatorForm
+                                    className={classes.root}
+                                    ref="form"
+                                    onSubmit={() => this.props.login(email, password)}
+                                    onError={errors => console.error(errors)}
+                                >
+                                    <TextValidator
+                                        label="Email"
+                                        onChange={this.handleChange}
+                                        name="email"
+                                        value={email}
+                                        validators={['required', 'isEmail']}
+                                        errorMessages={['this field is required', 'email is not valid']}
+                                    />
 
-                    <ValidatorForm
-                        className={classes.root}
-                        ref="form"
-                        onSubmit={() => this.props.login(email, password)}
-                        onError={errors => console.error(errors)}
-                    >
-                        <TextValidator
-                            label="Email"
-                            onChange={this.handleChange}
-                            name="email"
-                            value={email}
-                            validators={['required', 'isEmail']}
-                            errorMessages={['this field is required', 'email is not valid']}
-                        />
+                                    <TextValidator
+                                        label="Password"
+                                        onChange={this.handleChange}
+                                        name="password"
+                                        type="password"
+                                        value={password}
+                                        validators={['required', 'minStringLength:8', 'maxStringLength:255']}
+                                        errorMessages={['this field is required', 'Minimum 8 characters', 'Maximum 255 characters']}
+                                    />
 
-                        <TextValidator
-                            label="Password"
-                            onChange={this.handleChange}
-                            name="password"
-                            type="password"
-                            validators={['required', 'minStringLength:8', 'maxStringLength:255']}
-                            errorMessages={['this field is required', 'Minimum 8 characters', 'Maximum 255 characters']}
-                            value={password}
-                        />
-
-                        <Grid container direction="row" justify="center">
-                            <Button type="submit" variant="contained" color="primary">Log In</Button>
+                                    <Grid item xs={12}>
+                                        <Grid container direction="column" justify="center" alignItems="center">
+                                            <Button type="submit" variant="contained" color="primary">Log In</Button>
+                                        </Grid>
+                                    </Grid>
+                                </ValidatorForm>
+                            </Grid>
                         </Grid>
-                    </ValidatorForm>
+                    </Paper >
                 </Grid>
-            </Paper>
+            </Grid>
         );
     }
 }

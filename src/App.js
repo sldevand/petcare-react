@@ -13,7 +13,8 @@ import Logout from './components/User/Logout';
 
 const useStyles = theme => ({
   app: {
-    height:'100vh'
+    height:'99vh',
+    background:'#F0F0F0'
   }
 });
 
