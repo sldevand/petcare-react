@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import AccountIndex from './components/User/Account/AccountIndex';
 import ActivateIndex from './components/User/Account/ActivateIndex';
+import Logout from './components/User/Logout';
 
 const useStyles = theme => ({
   app: {
@@ -36,7 +37,8 @@ class App extends React.Component {
               <Route path="/account" exact component={AccountIndex} />
               <Route path="/account/activate/:id/:activationCode" component={ActivateIndex} />
               <Route path="/subscribe" component={SubscribeForm} />
-              <Route path="/login" component={LoginForm} />
+              <Route path="/login" exact component={LoginForm} />
+              <Route path="/logout" exact component={Logout} />
             </Box>
 
           </Switch>

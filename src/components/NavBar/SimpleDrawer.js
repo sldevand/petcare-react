@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 
 const useStyles = theme => ({
     list: {
@@ -45,6 +46,12 @@ class SimpleDrawer extends React.Component {
                 <ListItem button key="Sign Up" component={Link} to="/subscribe">
                     <ListItemIcon><AccountCircleIcon /></ListItemIcon>
                     <ListItemText primary="Sign Up" />
+                </ListItem>;
+        } else {
+            signupItem =
+                <ListItem button key="Logout" component={Link} to="/logout">
+                    <ListItemIcon><MeetingRoomIcon /></ListItemIcon>
+                    <ListItemText primary="Logout" />
                 </ListItem>;
         }
 

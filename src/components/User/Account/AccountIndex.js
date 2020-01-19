@@ -2,9 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Grid, Button } from '@material-ui/core';
+import { Paper, Grid, Fab } from '@material-ui/core';
 import { userActions, loginActions } from '../../../redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import AccountInfos from './AccountInfos';
+import EditIcon from '@material-ui/icons/Edit';
+
 
 const useStyles = theme => ({
     paper: {
@@ -33,20 +36,22 @@ class AccountIndex extends React.Component {
         let content = <CircularProgress />;
 
         if (this.props.loaded) {
-            content =
-                <React.Fragment>
-                    <h4>{this.props.firstName} {this.props.lastName} {this.props.email}</h4>
-                    <Button variant="contained" color="secondary" onClick={this.props.logout}>Logout</Button>
-                </React.Fragment>
+            content = <AccountInfos {...this.props} />
         }
 
         return (
-            <Paper className={classes.paper} elevation={3} >
-                <Grid container direction="column" justify="center" alignItems="center">
-                    <h1>Your Account</h1>
-                    {content}
-                </Grid>
-            </Paper>
+            <React.Fragment>
+                <Paper className={classes.paper} elevation={3} >
+                    <Grid container spacing={3} direction="row" justify="center" alignItems="center">
+                        <Grid item xs={6}>
+                            {content}
+                        </Grid>
+                    </Grid>
+                </Paper>
+                <Fab size="small" color="secondary" aria-label="edit">
+                    <EditIcon />
+                </Fab>
+            </React.Fragment>
         );
     }
 }
