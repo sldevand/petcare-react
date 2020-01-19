@@ -13,7 +13,12 @@ const useStyles = theme => ({
     paper: {
         margin: theme.spacing(2),
         padding: theme.spacing(2)
-    }
+    },
+    fab: {
+        position: 'absolute',
+        bottom: theme.spacing(4),
+        right: theme.spacing(4),
+      },
 });
 
 class AccountIndex extends React.Component {
@@ -40,18 +45,22 @@ class AccountIndex extends React.Component {
         }
 
         return (
-            <React.Fragment>
-                <Paper className={classes.paper} elevation={3} >
-                    <Grid container spacing={3} direction="row" justify="center" alignItems="center">
-                        <Grid item xs={6}>
-                            {content}
+            <Grid container direction="row" justify="center" alignItems="center">
+                <Grid item xs={12} sm={8}>
+                    <Paper className={classes.paper} elevation={3} >
+                        <Grid container spacing={3} direction="row" justify="center" alignItems="center">
+                            <Grid item xs={6}>
+                                {content}
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Paper>
-                <Fab size="small" color="secondary" aria-label="edit">
+                    </Paper>
+
+                </Grid>
+                <Fab className={classes.fab} size="medium" color="secondary" aria-label="edit">
                     <EditIcon />
                 </Fab>
-            </React.Fragment>
+            </Grid>
+
         );
     }
 }
