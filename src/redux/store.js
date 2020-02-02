@@ -3,6 +3,8 @@ import loginReducer from './login/loginReducer';
 import userReducer from './user/userReducer';
 import signupReducer from './signup/signupReducer';
 import snackbarReducer from './snackbar/snackbarReducer';
+import passwordReducer from './password/passwordReducer';
+
 
 import thunk from 'redux-thunk';
 
@@ -11,7 +13,8 @@ const allReducers = combineReducers({
     loginReducer,
     userReducer,
     signupReducer,
-    snackbarReducer
+    snackbarReducer,
+    passwordReducer
 });
 const store = createStore(allReducers,applyMiddleware(thunk));
 

@@ -32,14 +32,14 @@ class Login extends Component {
             this.props.history.push(`/`);
         }
         return (
-            <Grid container direction="column" justify="center" alignItems="center"  xs={12}>
-                <Grid item >
-                    <Paper className={classes.paper} elevation={3}>
+            <Grid container direction="row" justify="center" alignItems="center">
+                <Grid item xs={12} sm={10} md={8} lg={6} >
+                    <Paper className={classes.paper} elevation={3} >
                         <Grid container direction="column" justify="center" alignItems="center" >
-                            <Grid item >
+                            <Grid item xs={12}>
                                 <LoginForm />
                             </Grid>
-                            <Grid item >
+                            <Grid item xs={12}>
                                 <Button className={classes.button} variant="outlined" color="secondary" component={Link} to="/PasswordReset">Forgot Password?</Button>
                             </Grid>
                         </ Grid>
