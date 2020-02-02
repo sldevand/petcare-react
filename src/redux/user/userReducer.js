@@ -39,12 +39,19 @@ const userReducer = (state = initialState, action) => {
                 message: action.payload.errors,
 
             }
-        case userTypes.FETCH_USER_ACTIVATION:
+        case userTypes.FETCH_USER_ACTIVATION_SUCCESS:
             return {
                 ...state,
                 loaded: true,
-                activated: action.payload.data.activated,  
+                activated: true,  
                 message: action.payload.message
+            }
+        case userTypes.FETCH_USER_ACTIVATION_FAILURE:
+            return {
+                ...state,
+                loaded: true,
+                activated: false,  
+                message: action.payload.errors
             }
         default: return state;
     }

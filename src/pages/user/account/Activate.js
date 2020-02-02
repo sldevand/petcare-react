@@ -14,23 +14,23 @@ const useStyles = theme => ({
     }
 });
 
-class ActivateIndex extends React.Component {
+class Activate extends React.Component {
     componentWillMount() {
         const { id, activationCode } = this.props.match.params;
         this.props.activateUser(id, activationCode);
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, message, loaded } = this.props;
 
         let content = <CircularProgress />;
-        if (this.props.activated) {
+        if (loaded) {
             content =
                 <React.Fragment>
-                    <h3>Your account is activated!</h3>
+                    <h3>{message}</h3>
                     <Button variant="contained" color="primary" component={Link} to={'/login'}>Go to Login Form</Button>
                 </React.Fragment>
-        }
+        }        
 
         return (
             <Paper className={classes.paper} elevation={3} >
@@ -46,7 +46,9 @@ class ActivateIndex extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        activated: state.userReducer.activated
+        activated: state.userReducer.activated,
+        loaded: state.userReducer.loaded,
+        message: state.userReducer.message
     };
 }
 
@@ -61,4 +63,4 @@ const mapDispatchToProps = dispatch => {
 export default compose(
     withStyles(useStyles),
     connect(mapStateToProps, mapDispatchToProps)
-)(ActivateIndex);
+)(Activate);

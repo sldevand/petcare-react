@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import { loginActions } from '../../redux';
+import { loginActions } from '../../../redux';
 import { Button, Paper, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -12,7 +12,7 @@ const useStyles = theme => ({
     }
 });
 
-class Logout extends React.Component {
+class LogoutComponent extends React.Component {
 
     componentWillMount() {
         if (this.props.loggedIn === false) {
@@ -69,5 +69,5 @@ const mapDispatchToProps = dispatch => {
 export default compose(
     withStyles(useStyles),
     connect(mapStateToProps, mapDispatchToProps)
-)(Logout);
+)(LogoutComponent);
 

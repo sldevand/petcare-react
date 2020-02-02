@@ -7,7 +7,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import { loginActions } from '../../redux';
+import { loginActions } from '../../../redux';
 
 const useStyles = theme => ({
     title: {

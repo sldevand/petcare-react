@@ -24,8 +24,15 @@ const fetchUserFailure = error => {
 
 const fetchUserActivation = message => {
     return {
-        type: userTypes.FETCH_USER_ACTIVATION,
+        type: userTypes.FETCH_USER_ACTIVATION_SUCCESS,
         payload: message
+    }
+}
+
+const fetchUserActivationFailure = error => {
+    return {
+        type: userTypes.FETCH_USER_ACTIVATION_FAILURE,
+        payload: error
     }
 }
 
@@ -57,15 +64,15 @@ const activateUser = (id, activationcode) => {
         userService.fetchUserActivation(id, activationcode)
             .then(response => {
                 if (response.errors) {
-                    let userFailure = fetchUserFailure(response);
-                    dispatch(userFailure);
-                    dispatch(snackbarActions.open(userFailure.payload.errors, 'error'));
+                    let userActivationFailure = fetchUserActivationFailure(response);
+                    dispatch(userActivationFailure);
+                    dispatch(snackbarActions.open(userActivationFailure.payload.errors, 'error'));
                     return;
                 }
                 dispatch(fetchUserActivation(response));
             })
             .catch((response) => {
-                dispatch(fetchUserFailure(response));
+                dispatch(fetchUserActivationFailure(response));
             })
     }
 }

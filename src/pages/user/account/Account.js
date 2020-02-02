@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Paper, Grid, Fab } from '@material-ui/core';
 import { userActions, loginActions } from '../../../redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import AccountInfos from './AccountInfos';
+import AccountInfos from './../../../components/User/Account/AccountInfos';
 import EditIcon from '@material-ui/icons/Edit';
 
 
@@ -21,7 +21,7 @@ const useStyles = theme => ({
       },
 });
 
-class AccountIndex extends React.Component {
+class Account extends React.Component {
 
     componentWillMount() {
         if (this.props.loggedIn === false) {
@@ -89,4 +89,4 @@ const mapDispatchToProps = dispatch => {
 export default compose(
     withStyles(useStyles),
     connect(mapStateToProps, mapDispatchToProps)
-)(AccountIndex);
+)(Account);

@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import SimpleDrawer from './SimpleDrawer';
 import MainIcon from './../Icons/MainIcon';
 import { SvgIcon } from '@material-ui/core';
-import AccountButton from '../User/AccountButton';
+import AccountButton from '../User/Account/AccountButton';
 
 const useStyles = theme => ({
   root: {
