@@ -49,7 +49,7 @@ class Account extends React.Component {
                 <Grid item xs={12} sm={8}>
                     <Paper className={classes.paper} elevation={3} >
                         <Grid container spacing={3} direction="row" justify="center" alignItems="center">
-                            <Grid item xs={6}>
+                            <Grid item xs={12}>
                                 {content}
                             </Grid>
                         </Grid>
