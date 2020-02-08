@@ -8,6 +8,7 @@ const initialState = {
 
 const passwordReducer = (state = initialState, action) => {
     switch (action.type) {
+        case passwordTypes.FETCH_PASSWORD_CHANGE:
         case passwordTypes.FETCH_PASSWORD_RESET:
             return {
                 ...state,
@@ -15,6 +16,7 @@ const passwordReducer = (state = initialState, action) => {
                 success: false,
                 message: ''
             }
+        case passwordTypes.FETCH_PASSWORD_CHANGE_SUCCESS:
         case passwordTypes.FETCH_PASSWORD_RESET_SUCCESS:
             return {
                 ...state,
@@ -23,6 +25,7 @@ const passwordReducer = (state = initialState, action) => {
                 message: action.payload.message,
 
             }
+        case passwordTypes.FETCH_PASSWORD_CHANGE_FAILURE:
         case passwordTypes.FETCH_PASSWORD_RESET_FAILURE:
             return {
                 ...state,
