@@ -12,6 +12,7 @@ import Activate from './pages/user/account/Activate';
 import Reset from './pages/password/Reset';
 import Change from './pages/password/Change';
 import Page404 from './pages/error/Page404';
+import config from './config';
 
 const useStyles = theme => ({
   app: {
@@ -28,7 +29,7 @@ class App extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Router >
+      <Router basename={config.baseUrl}>
         <div className={classes.app}>
           <header className="App-header">
             <NavBar title={this.state.title} />
