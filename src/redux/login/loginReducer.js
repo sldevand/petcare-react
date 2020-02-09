@@ -33,11 +33,6 @@ const loginReducer = (state = initialState, action) => {
                 ...state,
                 loggedIn: action.loggedIn
             }
-        case loginTypes.LOGOUT:
-            return {
-                ...state,
-                loggedIn: false
-            }
         default: return state;
     }
 }

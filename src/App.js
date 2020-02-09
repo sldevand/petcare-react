@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import MessageSnackBar from './components/Message/MessageSnackBar';
 import { withStyles } from '@material-ui/core/styles';
-import Logout from './components/User/Logout/LogoutComponent';
+import Logout from './pages/user/Logout';
 import Account from './pages/user/account/Account';
 import Login from './pages/user/Login';
 import Signin from './pages/user/Signin';
@@ -40,8 +40,8 @@ class App extends React.Component {
               <Route path="/account/activate/:id/:activationCode" component={Activate} />
               <Route path="/subscribe" render={(routeProps) => <Signin {...routeProps}/>}/>
               <Route path="/login" exact render={(routeProps) => <Login {...routeProps}/>} />
-              <Route path="/logout" exact component={Logout} />
-              <Route path="/passwordReset" exact render={(routeProps) => <Reset {...routeProps}/>} />
+              <Route path="/logout" exact render={(routeProps) => <Logout {...routeProps}/>} />
+              <Route path="/passwordReset" exact render={(routeProps) => <Reset {...routeProps}/>} />             
               <Route path="/passwordChange/:id/:resetCode" component={Change}/>} />
               <Route render={(routeProps) => <Page404 {...routeProps}/>} />
           </Switch>

@@ -22,12 +22,6 @@ const fetchLoginFailure = error => {
     }
 }
 
-const logoutBuilder = () => {
-    return {
-        type: loginTypes.LOGOUT
-    }
-}
-
 const isLoggedInBuilder = loggedIn => {
     return {
         type: loginTypes.IS_LOGGED_IN,
@@ -61,14 +55,6 @@ const login = (email, password) => {
     }
 }
 
-const logout = () => {
-    return (dispatch) => {
-       localStorage.removeItem('apiKey');
-       dispatch(logoutBuilder());
-       dispatch(snackbarActions.open('You have logged out!', 'success'));
-    }
-}
-
 const isLoggedIn = () => {
     return (dispatch) => {
         if(localStorage.getItem('apiKey')){
@@ -81,6 +67,5 @@ const isLoggedIn = () => {
 
 export const loginActions = {
     login,
-    isLoggedIn,
-    logout
+    isLoggedIn
 }
