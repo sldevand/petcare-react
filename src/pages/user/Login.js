@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
-import LoginForm from '../../components/User/Login/LoginForm'
+import LoginForm from './../../components/User/Login/LoginForm'
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
-import { loginActions } from '../../redux';
-import { Grid, Button, Paper } from '@material-ui/core';
+import { loginActions } from './../../redux';
+import { Grid, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import GridPaper from './../../components/Container/GridPaper';
 
 const useStyles = theme => ({
     button: {
         margin: theme.spacing(4)
-    },
-    paper: {
-        margin: theme.spacing(2),
-        padding: theme.spacing(2)
     }
 });
 
@@ -32,20 +29,16 @@ class Login extends Component {
             this.props.history.push(`/`);
         }
         return (
-            <Grid container direction="row" justify="center" alignItems="center">
-                <Grid item xs={12} sm={10} md={8} lg={6} >
-                    <Paper className={classes.paper} elevation={3} >
-                        <Grid container direction="column" justify="center" alignItems="center" >
-                            <Grid item xs={12}>
-                                <LoginForm />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Button className={classes.button} variant="outlined" color="secondary" component={Link} to="/PasswordReset">Forgot Password?</Button>
-                            </Grid>
-                        </ Grid>
-                    </Paper>
+            <GridPaper>
+                <Grid container direction="column" justify="center" alignItems="center" >
+                    <Grid item xs={12}>
+                        <LoginForm />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button className={classes.button} variant="outlined" color="secondary" component={Link} to="/PasswordReset">Forgot Password?</Button>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </GridPaper>
         );
     }
 }

@@ -22,10 +22,10 @@ const fetchPasswordChangeFailure = (error) => {
     }
 }
 
-const change = (email) => {
+const change = (email, id, resetCode, newPassword) => {
     return (dispatch) => {
         dispatch(fetchPasswordChange());
-        passwordService.passwordChange(email)
+        passwordService.passwordChange(email, id, resetCode, newPassword)
             .then(response => {
 
                 if (response.errors) {

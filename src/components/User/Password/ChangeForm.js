@@ -6,28 +6,30 @@ import { passwordActions } from '../../../redux';
 import FormWrapper from '../../Form/FormWrapper';
 import { Button } from '@material-ui/core';
 
-class ResetForm extends UserForm {
+class ChangeForm extends UserForm {
     state = {
-        email: ''
+        email: '',
+        password: ''
     }
 
     constructor() {
         super();
-        this.title='Reset Password'
+        this.title = 'Change Password'
     }
 
     render() {
-        const { email } = this.state;
-        
-        const fieldNames = ['email']
-        const submitButton = <Button type="submit" variant="contained" color="primary">Send Mail</Button> 
+        const { email, password } = this.state;
+        const { id, resetCode} = this.props;
+
+        const fieldNames = ['email', 'password', 'confirmPassword']
+        const submitButton = <Button type="submit" variant="contained" color="primary">Confirm</Button>
 
         return (
             <FormWrapper
                 title={this.title}
                 fieldNames={fieldNames}
                 handleChange={this.handleChange}
-                onSubmit={() => this.props.passwordReset(email)}
+                onSubmit={() => this.props.passwordChange(email, id, resetCode, password)}
                 submitButton={submitButton}
             />
         )
@@ -42,13 +44,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        passwordReset: (email) => {
-            dispatch(passwordActions.reset(email))
+        passwordChange: (email, id, resetCode, password) => {
+            dispatch(passwordActions.change(email, id, resetCode, password))
         }
     }
 }
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps)
-)(ResetForm);
+)(ChangeForm);
 

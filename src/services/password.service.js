@@ -23,8 +23,6 @@ async function passwordChange(email, id, resetCode, newPassword) {
     return response;
 }
 
-
-
 export const passwordService = {
     passwordReset,
     passwordChange

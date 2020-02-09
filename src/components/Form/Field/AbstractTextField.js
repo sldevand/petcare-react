@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-class UserForm extends React.Component {
+class AbstractTextField extends React.Component {
+
     handleChange = (event) => {
         let stateObject = function () {
             let returnObj = {};
@@ -9,7 +10,8 @@ class UserForm extends React.Component {
         }.bind(event)();
 
         this.setState(stateObject);
+        this.props.handleChange(event);
     }
 }
 
-export default UserForm;
+export default AbstractTextField

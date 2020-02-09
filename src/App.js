@@ -10,10 +10,12 @@ import Login from './pages/user/Login';
 import Signin from './pages/user/Signin';
 import Activate from './pages/user/account/Activate';
 import Reset from './pages/password/Reset';
+import Change from './pages/password/Change';
+import Page404 from './pages/error/Page404';
 
 const useStyles = theme => ({
   app: {
-    height:'99vh',
+    height:'100vh',
     background:'#F0F0F0'
   }
 });
@@ -40,11 +42,12 @@ class App extends React.Component {
               <Route path="/login" exact render={(routeProps) => <Login {...routeProps}/>} />
               <Route path="/logout" exact component={Logout} />
               <Route path="/passwordReset" exact render={(routeProps) => <Reset {...routeProps}/>} />
+              <Route path="/passwordChange/:id/:resetCode" component={Change}/>} />
+              <Route render={(routeProps) => <Page404 {...routeProps}/>} />
           </Switch>
           <MessageSnackBar />
         </div>
       </Router>
-
     );
   }
 }
