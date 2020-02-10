@@ -1,6 +1,8 @@
 import { logoutTypes } from "./logoutTypes"
 import { snackbarActions } from "../snackbar/snackbarActions"
 import { loginTypes } from "../login/loginTypes"
+import { storageService } from "../../services/storage.service"
+
 
 const logoutBuilder = message => {
     return {
@@ -18,13 +20,12 @@ const isNotLoggedInBuilder = () => {
 
 const logout = () => {
     return (dispatch) => {
-        localStorage.removeItem('apiKey');
-
+        storageService.removeApiKey();
         let message = 'You have logged out!'
 
         dispatch(isNotLoggedInBuilder());
-        dispatch(logoutBuilder(message));     
-        dispatch(snackbarActions.open(message, 'success'));   
+        dispatch(logoutBuilder(message));
+        dispatch(snackbarActions.open(message, 'success'));
     }
 }
 

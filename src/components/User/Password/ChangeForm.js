@@ -5,6 +5,7 @@ import UserForm from './../UserForm';
 import { passwordActions } from '../../../redux';
 import FormWrapper from '../../Form/FormWrapper';
 import { Button } from '@material-ui/core';
+import SimpleBackdrop from '../../Loader/SimpleBackdrop';
 
 class ChangeForm extends UserForm {
     state = {
@@ -19,26 +20,29 @@ class ChangeForm extends UserForm {
 
     render() {
         const { email, password } = this.state;
-        const { id, resetCode} = this.props;
+        const { id, resetCode, loading } = this.props;
 
         const fieldNames = ['email', 'password', 'confirmPassword']
         const submitButton = <Button type="submit" variant="contained" color="primary">Confirm</Button>
 
         return (
-            <FormWrapper
-                title={this.title}
-                fieldNames={fieldNames}
-                handleChange={this.handleChange}
-                onSubmit={() => this.props.passwordChange(email, id, resetCode, password)}
-                submitButton={submitButton}
-            />
+            <React.Fragment>
+                <FormWrapper
+                    title={this.title}
+                    fieldNames={fieldNames}
+                    handleChange={this.handleChange}
+                    onSubmit={() => this.props.passwordChange(email, id, resetCode, password)}
+                    submitButton={submitButton}
+                />
+                <SimpleBackdrop open={loading} />
+            </React.Fragment>
         )
     }
 }
 
 const mapStateToProps = state => {
     return {
-        loaded: state.passwordReducer.loaded
+        loading: state.passwordReducer.loading
     };
 }
 

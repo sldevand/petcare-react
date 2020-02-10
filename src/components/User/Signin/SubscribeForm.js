@@ -1,11 +1,20 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
 import UserForm from '../UserForm';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { signupActions } from '../../../redux';
 import FormWrapper from '../../Form/FormWrapper';
+import SimpleBackdrop from '../../Loader/SimpleBackdrop';
+
+const useStyles = theme => ({
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+    }
+})
 
 class SubscribeForm extends UserForm {
 
@@ -32,26 +41,31 @@ class SubscribeForm extends UserForm {
     }
 
     render() {
+        const { loading } = this.props;
         const { email, firstName, lastName, password } = this.state;
 
         const fieldNames = ['email', 'firstName', 'lastName', 'password'];
         const submitButton = <Button type="submit" variant="contained" color="primary">Sign up</Button>
 
         return (
-            <FormWrapper
-                title={this.title}
-                fieldNames={fieldNames}
-                handleChange={this.handleChange}
-                onSubmit={() => this.props.signup(email, firstName, lastName, password)}
-                submitButton={submitButton}
-            />
+            <React.Fragment>
+                <FormWrapper
+                    title={this.title}
+                    fieldNames={fieldNames}
+                    handleChange={this.handleChange}
+                    onSubmit={() => this.props.signup(email, firstName, lastName, password)}
+                    submitButton={submitButton}
+                />
+                <SimpleBackdrop open={loading} />
+            </React.Fragment>
         );
     }
 }
 const mapStateToProps = state => {
     return {
         success: state.signupReducer.success,
-        message: state.signupReducer.message
+        message: state.signupReducer.message,
+        loading: state.signupReducer.loading
     };
 }
 
@@ -64,5 +78,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default compose(
+    withStyles(useStyles),
     connect(mapStateToProps, mapDispatchToProps)
 )(SubscribeForm);

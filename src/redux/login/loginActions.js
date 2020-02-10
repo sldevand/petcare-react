@@ -1,6 +1,7 @@
 import { userService } from "../../services/user.service"
 import { loginTypes } from "./loginTypes"
 import { snackbarActions } from "../snackbar/snackbarActions"
+import { storageService } from "../../services/storage.service"
 
 const fetchLoginRequest = () => {
     return {
@@ -42,7 +43,7 @@ const login = (email, password) => {
                 }
 
                 if (response.data.apiKey) {
-                    localStorage.setItem('apiKey', response.data.apiKey);
+                    storageService.setApiKey(response.data.apiKey);
                 }
                 
                 let loginSuccess = fetchLoginSuccess(response);          
@@ -57,7 +58,7 @@ const login = (email, password) => {
 
 const isLoggedIn = () => {
     return (dispatch) => {
-        if(localStorage.getItem('apiKey')){
+        if(storageService.getApiKey()){
             dispatch(isLoggedInBuilder(true));
         } else {
             dispatch(isLoggedInBuilder(false));

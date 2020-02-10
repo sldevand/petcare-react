@@ -35,7 +35,6 @@ async function fetchUser() {
     return response;
 }
 
-
 async function fetchUserActivation(id, activationCode) {
     let response = await api.handleGet(
         `user/activate/${id}/${activationCode}`

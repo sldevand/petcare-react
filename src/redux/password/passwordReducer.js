@@ -1,7 +1,7 @@
 import { passwordTypes } from './passwordTypes';
 
 const initialState = {
-    loaded: false,
+    loading: false,
     email: '',
     message: ''
 };
@@ -12,7 +12,7 @@ const passwordReducer = (state = initialState, action) => {
         case passwordTypes.FETCH_PASSWORD_RESET:
             return {
                 ...state,
-                loaded: false,
+                loading: true,
                 success: false,
                 message: ''
             }
@@ -20,7 +20,7 @@ const passwordReducer = (state = initialState, action) => {
         case passwordTypes.FETCH_PASSWORD_RESET_SUCCESS:
             return {
                 ...state,
-                loaded: true,
+                loading: false,
                 success: true,
                 message: action.payload.message,
 
@@ -29,7 +29,7 @@ const passwordReducer = (state = initialState, action) => {
         case passwordTypes.FETCH_PASSWORD_RESET_FAILURE:
             return {
                 ...state,
-                loaded: true,
+                loading: false,
                 success: false,
                 message: action.payload.errors,
 

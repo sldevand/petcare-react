@@ -35,7 +35,7 @@ class Home extends React.Component {
                 <Grid container direction="column" justify="center" alignItems="center">
                     <h1>Welcome To {title}</h1>
                     <Grid item >
-                        <h4>This app is a notebook where you can save your pet(s) health care.</h4>
+                        <h4>This app is a notebook where you can manage your pet(s) health care.</h4>
                     </Grid>
                     {noAccount}
                 </Grid>

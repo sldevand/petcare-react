@@ -1,4 +1,5 @@
 import config from './../config';
+import { storageService } from './storage.service';
 
 export const api = {
     handlePost,
@@ -20,7 +21,7 @@ async function handleGet(endpoint) {
 
 async function handleSecuredGet(endpoint) {
 
-    const apiKey = localStorage.getItem('apiKey');
+    const apiKey = storageService.getApiKey();
 
 
     let headers = {

@@ -23,10 +23,10 @@ class LogoutComponent extends React.Component {
                 <Grid item xs={12}>
                     <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
                         <Grid item xs={6}>
-                            <Button variant="contained" color="primary" onClick={this.props.history.goBack}>Cancel</Button>
+                            <Button variant="outlined" color="secondary" onClick={this.props.history.goBack}>Cancel</Button>
                         </Grid>
                         <Grid item xs={6}>
-                            <Button variant="contained" color="secondary" onClick={this.props.logout}>Logout</Button>
+                            <Button variant="contained" color="primary" onClick={this.props.logout}>Logout</Button>
                         </Grid>
                     </Grid>
                 </Grid>
