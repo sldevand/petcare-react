@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from './components/NavBar/NavBar';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './pages/Home';
 import MessageSnackBar from './components/Message/MessageSnackBar';
 import { withStyles } from '@material-ui/core/styles';
 import Logout from './pages/user/Logout';

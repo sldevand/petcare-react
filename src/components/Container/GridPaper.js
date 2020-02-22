@@ -4,7 +4,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 const useStyles = theme => ({
     paper: {
-        margin: theme.spacing(2),
+        marginTop: theme.spacing(2),
+        marginLeft: theme.spacing(2),
+        marginBottom: theme.spacing(0),
+        marginRight: theme.spacing(2),
         padding: theme.spacing(2)
     }
 });
