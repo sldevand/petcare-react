@@ -23,13 +23,14 @@ const useStyles = theme => ({
 
 class Home extends React.Component {
     render() {
-        const { classes } = this.props;
+        const { classes, loggedIn } = this.props;
         const { title } = this.props;
 
         let noAccount = '';
         let description = '';
-        let petList = ''
-        if (!this.props.loggedIn) {
+        let petList = '';
+        let addFab = '';
+        if (!loggedIn) {
             noAccount =
                 <React.Fragment>
                     <div className={classes.spacer}>No Account ?</div>
@@ -62,6 +63,13 @@ class Home extends React.Component {
                 }
             ]
             petList = <PetList petsData={petsData}></PetList>
+            addFab = <Fab className={classes.fab}
+                size="large"
+                color="secondary"
+                aria-label="add"
+                component={Link} to="/pet/add">
+                <AddIcon />
+            </Fab>
         }
 
         return (
@@ -75,13 +83,7 @@ class Home extends React.Component {
                     {noAccount}
                 </GridPaper>
                 {petList}
-                <Fab className={classes.fab}
-                    size="large"
-                    color="secondary"
-                    aria-label="add"
-                    component={Link} to="/pet/add">
-                    <AddIcon />
-                </Fab>
+                {addFab}
             </React.Fragment>
         );
     }
