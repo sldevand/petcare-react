@@ -54,9 +54,8 @@ class Account extends React.Component {
                             </Grid>
                         </Grid>
                     </Paper>
-
                 </Grid>
-                <Fab className={classes.fab} size="medium" color="secondary" aria-label="edit">
+                <Fab className={classes.fab} size="large" color="secondary" aria-label="edit">
                     <EditIcon />
                 </Fab>
             </Grid>

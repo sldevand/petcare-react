@@ -1,18 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, Fab } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import MainIcon from '../components/Icons/MainIcon';
 import PetList from '../components/Pet/PetList';
 import GridPaper from '../components/Container/GridPaper';
+import AddIcon from '@material-ui/icons/Add';
 
 
 const useStyles = theme => ({
     spacer: {
         margin: theme.spacing(4)
-    }
+    },
+    fab: {
+        position: 'absolute',
+        bottom: theme.spacing(4),
+        right: theme.spacing(4),
+    },
 });
 
 class Home extends React.Component {
@@ -37,16 +43,19 @@ class Home extends React.Component {
         } else {
             let petsData = [
                 {
+                    id: 1,
                     name: "Elie",
                     src: "static/images/avatar/cat.jpg",
                     dob: "02/05/2010"
                 },
                 {
+                    id: 2,
                     name: "Medor",
                     src: "/static/images/avatar/dog.jpg",
                     dob: "25/10/2012"
                 },
                 {
+                    id: 3,
                     name: "Bubulle",
                     src: "/static/images/avatar/fish.jpg",
                     dob: "25/12/2012"
@@ -66,6 +75,13 @@ class Home extends React.Component {
                     {noAccount}
                 </GridPaper>
                 {petList}
+                <Fab className={classes.fab}
+                    size="large"
+                    color="secondary"
+                    aria-label="add"
+                    component={Link} to="/pet/add">
+                    <AddIcon />
+                </Fab>
             </React.Fragment>
         );
     }

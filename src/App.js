@@ -13,11 +13,12 @@ import Reset from './pages/password/Reset';
 import Change from './pages/password/Change';
 import Page404 from './pages/error/Page404';
 import config from './config';
+import PetAdd from './pages/pet/PetAdd';
 
 const useStyles = theme => ({
   app: {
-    height:'100vh',
-    background:'#F0F0F0'
+    height: '100vh',
+    background: '#F0F0F0'
   }
 });
 
@@ -36,15 +37,16 @@ class App extends React.Component {
           </header>
 
           <Switch>
-              <Route path="/" exact render={(props) => <Home title={this.state.title} />} />
-              <Route path="/account" exact component={Account} />
-              <Route path="/account/activate/:id/:activationCode" component={Activate} />
-              <Route path="/subscribe" render={(routeProps) => <Signin {...routeProps}/>}/>
-              <Route path="/login" exact render={(routeProps) => <Login {...routeProps}/>} />
-              <Route path="/logout" exact render={(routeProps) => <Logout {...routeProps}/>} />
-              <Route path="/passwordReset" exact render={(routeProps) => <Reset {...routeProps}/>} />             
-              <Route path="/passwordChange/:id/:resetCode" component={Change}/>} />
-              <Route render={(routeProps) => <Page404 {...routeProps}/>} />
+            <Route path="/" exact render={(props) => <Home title={this.state.title} />} />
+            <Route path="/account" exact component={Account} />
+            <Route path="/account/activate/:id/:activationCode" component={Activate} />
+            <Route path="/subscribe" render={(routeProps) => <Signin {...routeProps} />} />
+            <Route path="/login" exact render={(routeProps) => <Login {...routeProps} />} />
+            <Route path="/logout" exact render={(routeProps) => <Logout {...routeProps} />} />
+            <Route path="/passwordReset" exact render={(routeProps) => <Reset {...routeProps} />} />
+            <Route path="/passwordChange/:id/:resetCode" component={Change} />} />
+            <Route path="/pet/add" exact render={(routeProps) => <PetAdd {...routeProps} />} />} />
+            <Route render={(routeProps) => <Page404 {...routeProps} />} />
           </Switch>
           <MessageSnackBar />
         </div>
