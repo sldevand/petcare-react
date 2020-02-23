@@ -48,7 +48,7 @@ class Home extends React.Component {
                 },
                 {
                     name: "Bubulle",
-                    src: "/static/images/avatar/1.jpg",
+                    src: "/static/images/avatar/fish.jpg",
                     dob: "25/12/2012"
                 }
             ]
