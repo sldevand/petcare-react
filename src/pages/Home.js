@@ -42,27 +42,7 @@ class Home extends React.Component {
                 </Grid>
 
         } else {
-            let petsData = [
-                {
-                    id: 1,
-                    name: "Elie",
-                    src: "static/images/avatar/cat.jpg",
-                    dob: "02/05/2010"
-                },
-                {
-                    id: 2,
-                    name: "Medor",
-                    src: "/static/images/avatar/dog.jpg",
-                    dob: "25/10/2012"
-                },
-                {
-                    id: 3,
-                    name: "Bubulle",
-                    src: "/static/images/avatar/fish.jpg",
-                    dob: "25/12/2012"
-                }
-            ]
-            petList = <PetList petsData={petsData}></PetList>
+            petList = <PetList />
             addFab = <Fab className={classes.fab}
                 size="large"
                 color="secondary"

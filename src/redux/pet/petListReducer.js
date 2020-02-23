@@ -7,38 +7,34 @@ const initialState = {
     data: []
 };
 
-const petReducer = (state = initialState, action) => {
+const petListReducer = (state = initialState, action) => {
     switch (action.type) {
-        case petTypes.FETCH_PET_ADD_RESET:
+        case petTypes.FETCH_PET_GET_LIST_REQUEST:
             return {
                 ...state,
                 success: false,
                 message: '',
-                loading: false,
+                loading: true,
+                data: []
             }
-        case petTypes.FETCH_PET_ADD_REQUEST:
-            return {
-                ...state,
-                success: false,
-                message: '',
-                loading: true
-            }
-        case petTypes.FETCH_PET_ADD_SUCCESS:
-            return {
-                ...state,
-                success: action.payload.status,
-                message: action.payload.message,
-                loading: false
-            }
-        case petTypes.FETCH_PET_ADD_FAILURE:
+        case petTypes.FETCH_PET_GET_LIST_SUCCESS:
             return {
                 ...state,
                 success: action.payload.status,
                 message: action.payload.errors,
-                loading: false
+                loading: false,
+                data: action.payload.data
+            }
+        case petTypes.FETCH_PET_GET_LIST_FAILURE:
+            return {
+                ...state,
+                success: action.payload.status,
+                message: action.payload.errors,
+                loading: false,
+                data: []
             }
         default: return state;
     }
 }
 
-export default petReducer;
+export default petListReducer;

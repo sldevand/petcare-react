@@ -11,6 +11,13 @@ async function add(name, dob, specy, image) {
     return response;
 }
 
+async function getList() {
+    let response = await api.handleSecuredGet('api/pets');
+
+    return response;
+}
+
 export const petService = {
-    add
+    add,
+    getList
 };

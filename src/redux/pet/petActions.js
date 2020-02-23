@@ -1,56 +1,7 @@
-import { petTypes } from "./petTypes"
-import { snackbarActions } from "../snackbar/snackbarActions"
-import { petService } from "../../services/pet.service"
-
-const fetchPetAddReset = () => {
-    return {
-        type: petTypes.FETCH_PET_ADD_RESET
-    }
-}
-
-const fetchPetAddRequest = () => {
-    return {
-        type: petTypes.FETCH_PET_ADD_REQUEST
-    }
-}
-
-const fetchPetAddSuccess = message => {
-    return {
-        type: petTypes.FETCH_PET_ADD_SUCCESS,
-        payload: message
-    }
-}
-
-const fetchPetAddFailure = error => {
-    return {
-        type: petTypes.FETCH_PET_ADD_FAILURE,
-        payload: error
-    }
-}
-
-const add = (name, dob, specy, image) => {
-    return (dispatch) => {
-        dispatch(fetchPetAddRequest());
-        petService.add(name, dob, specy, image)
-            .then(response => {
-                if (response.errors) {
-                    let petAddFailure = fetchPetAddFailure(response);
-                    dispatch(petAddFailure);
-                    dispatch(snackbarActions.open(petAddFailure.payload.errors, 'error'));
-                    return;
-                }
-                
-                let petAddSuccess = fetchPetAddSuccess(response);          
-                dispatch(petAddSuccess);
-                dispatch(snackbarActions.open(petAddSuccess.payload.message, 'success'));
-                dispatch(fetchPetAddReset());
-            })
-            .catch((response) => {
-                dispatch(fetchPetAddFailure(response));
-            })
-    }
-}
-
+import add from "./actions/add";
+import getList from "./actions/getList";
+ 
 export const petActions = {
-    add
+    add,
+    getList
 }
