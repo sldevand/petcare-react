@@ -10,6 +10,10 @@ class UserForm extends React.Component {
 
         this.setState(stateObject);
     }
+
+    handleDateChange = (dob) => {
+        this.setState({dob});
+    }
 }
 
 export default UserForm;

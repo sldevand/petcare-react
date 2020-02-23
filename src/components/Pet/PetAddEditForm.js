@@ -4,15 +4,15 @@ import compose from 'recompose/compose';
 import Button from '@material-ui/core/Button';
 import FormWrapper from './../Form/FormWrapper';
 import SimpleBackdrop from './../Loader/SimpleBackdrop';
-import UserForm from './../User/UserForm';
 import { petActions } from '../../redux';
+import UserForm from './../User/UserForm';
 
 class PetAddEditForm extends UserForm {
 
     state = {
         id: '',
         name: '',
-        dob: '',
+        dob: new Date(),
         specy: '',
         image: ''
     };
@@ -22,12 +22,12 @@ class PetAddEditForm extends UserForm {
         this.title = "Add/Edit Pet"
     }
 
-    render() {
+    render() {        
         const { loading } = this.props;
         const { name, dob, specy, image } = this.state;
 
-        const fieldNames = ['name', 'dob', 'specy', 'image'];
-        const submitButton = <Button type="submit" variant="contained" color="primary">Log In</Button>
+        const fieldNames = ['name','dob', 'specy', 'image'];
+        const submitButton = <Button type="submit" variant="contained" color="primary">Add Pet</Button>
 
         return (
             <React.Fragment>
@@ -35,6 +35,7 @@ class PetAddEditForm extends UserForm {
                     title={this.title}
                     fieldNames={fieldNames}
                     handleChange={this.handleChange}
+                    handleDateChange={this.handleDateChange}
                     onSubmit={() => this.props.addPet(name, dob, specy, image)}
                     submitButton={submitButton}
                 />
@@ -46,7 +47,7 @@ class PetAddEditForm extends UserForm {
 
 const mapStateToProps = state => {
     return {
-        loggedIn: state.loginReducer.loggedIn
+        loading : state.petReducer.loading
     };
 }
 

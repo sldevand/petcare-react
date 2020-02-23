@@ -4,6 +4,8 @@ import Password from './Field/Password';
 import FirstName from './Field/FirstName';
 import LastName from './Field/LastName';
 import Name from './Field/Name';
+import Specy from './Field/Specy';
+import Dob from './Field/DatePicker/Dob';
 
 class Fields extends Component {
     buildFields = (fieldNames) => {
@@ -19,6 +21,10 @@ class Fields extends Component {
                     return <LastName key="lastName" handleChange={this.props.handleChange} />
                 case 'name':
                     return <Name key="name" handleChange={this.props.handleChange} />
+                case 'specy':
+                    return <Specy key="specy" handleChange={this.props.handleChange} />
+                case 'dob':
+                    return <Dob key="dob" handleDateChange={this.props.handleDateChange}/>
                 default:
                     return null;
             }

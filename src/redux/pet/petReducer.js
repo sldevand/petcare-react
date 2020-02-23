@@ -9,6 +9,13 @@ const initialState = {
 
 const petReducer = (state = initialState, action) => {
     switch (action.type) {
+        case petTypes.FETCH_PET_ADD_RESET:
+            return {
+                ...state,
+                success: false,
+                message: '',
+                loading: false,
+            }
         case petTypes.FETCH_PET_ADD_REQUEST:
             return {
                 ...state,

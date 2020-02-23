@@ -2,6 +2,12 @@ import { petTypes } from "./petTypes"
 import { snackbarActions } from "../snackbar/snackbarActions"
 import { petService } from "../../services/pet.service"
 
+const fetchPetAddReset = () => {
+    return {
+        type: petTypes.FETCH_PET_ADD_RESET
+    }
+}
+
 const fetchPetAddRequest = () => {
     return {
         type: petTypes.FETCH_PET_ADD_REQUEST
@@ -37,6 +43,7 @@ const add = (name, dob, specy, image) => {
                 let petAddSuccess = fetchPetAddSuccess(response);          
                 dispatch(petAddSuccess);
                 dispatch(snackbarActions.open(petAddSuccess.payload.message, 'success'));
+                dispatch(fetchPetAddReset());
             })
             .catch((response) => {
                 dispatch(fetchPetAddFailure(response));

@@ -17,7 +17,7 @@ const useStyles = theme => ({
 });
 class FormWrapper extends React.Component {
     render() {
-        const { classes, title, onSubmit, submitButton, handleChange, fieldNames } = this.props;
+        const { classes, title, onSubmit, submitButton, handleChange, handleDateChange, fieldNames } = this.props;
 
         return (
             <Grid container direction="column" justify="center" alignItems="center">
@@ -31,7 +31,7 @@ class FormWrapper extends React.Component {
                         onSubmit={onSubmit}
                         onError={errors => console.error(errors)}
                     >
-                        <Fields fieldNames={fieldNames} handleChange={handleChange} />
+                        <Fields fieldNames={fieldNames} handleChange={handleChange} handleDateChange={handleDateChange} />
 
                         <Grid container direction="column" justify="center" alignItems="center">
                             <Grid item>
