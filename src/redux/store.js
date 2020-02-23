@@ -5,6 +5,7 @@ import userReducer from './user/userReducer';
 import signupReducer from './signup/signupReducer';
 import snackbarReducer from './snackbar/snackbarReducer';
 import passwordReducer from './password/passwordReducer';
+import petReducer from './pet/petReducer';
 
 
 import thunk from 'redux-thunk';
@@ -16,7 +17,8 @@ const allReducers = combineReducers({
     userReducer,
     signupReducer,
     snackbarReducer,
-    passwordReducer
+    passwordReducer,
+    petReducer
 });
 const store = createStore(allReducers,applyMiddleware(thunk));
 

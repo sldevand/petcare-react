@@ -5,13 +5,16 @@ import Button from '@material-ui/core/Button';
 import FormWrapper from './../Form/FormWrapper';
 import SimpleBackdrop from './../Loader/SimpleBackdrop';
 import UserForm from './../User/UserForm';
-
+import { petActions } from '../../redux';
 
 class PetAddEditForm extends UserForm {
 
     state = {
-        email: '',
-        password: ''
+        id: '',
+        name: '',
+        dob: '',
+        specy: '',
+        image: ''
     };
 
     constructor() {
@@ -21,9 +24,9 @@ class PetAddEditForm extends UserForm {
 
     render() {
         const { loading } = this.props;
-        const { email, password } = this.state;
+        const { name, dob, specy, image } = this.state;
 
-        const fieldNames = ['email', 'password'];
+        const fieldNames = ['name', 'dob', 'specy', 'image'];
         const submitButton = <Button type="submit" variant="contained" color="primary">Log In</Button>
 
         return (
@@ -32,7 +35,7 @@ class PetAddEditForm extends UserForm {
                     title={this.title}
                     fieldNames={fieldNames}
                     handleChange={this.handleChange}
-                    onSubmit={() => this.props.login(email, password)}
+                    onSubmit={() => this.props.addPet(name, dob, specy, image)}
                     submitButton={submitButton}
                 />
                 <SimpleBackdrop open={loading} />
@@ -47,6 +50,14 @@ const mapStateToProps = state => {
     };
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        addPet: (name, dob, specy, image) => {
+            dispatch(petActions.add(name, dob, specy, image))
+        }
+    }
+}
+
 export default compose(
-    connect(mapStateToProps)
+    connect(mapStateToProps, mapDispatchToProps)
 )(PetAddEditForm);

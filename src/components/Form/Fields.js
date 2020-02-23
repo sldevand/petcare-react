@@ -3,6 +3,7 @@ import Email from './Field/Email';
 import Password from './Field/Password';
 import FirstName from './Field/FirstName';
 import LastName from './Field/LastName';
+import Name from './Field/Name';
 
 class Fields extends Component {
     buildFields = (fieldNames) => {
@@ -16,6 +17,8 @@ class Fields extends Component {
                     return <FirstName key="firstName" handleChange={this.props.handleChange} />
                 case 'lastName':
                     return <LastName key="lastName" handleChange={this.props.handleChange} />
+                case 'name':
+                    return <Name key="name" handleChange={this.props.handleChange} />
                 default:
                     return null;
             }
