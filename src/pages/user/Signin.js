@@ -5,17 +5,13 @@ import SubscribeForm from './../../components/User/Signin/SubscribeForm';
 import GridPaper from './../../components/Container/GridPaper';
 import SuccessWithLink from './../../components/Message/SuccessWithLink';
 
-
 class Signin extends Component {
     render() {
         const { success, message } = this.props;
 
-        let content = '';
-        if (!success) {
-            content = <SubscribeForm />
-        } else {
-            content = <SuccessWithLink message={message} to="/login" title="Login" />
-        }
+        let content = success
+            ? <SuccessWithLink message={message} to="/login" title="Login" />
+            : <SubscribeForm />;
 
         return (
             <GridPaper>

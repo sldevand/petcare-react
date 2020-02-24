@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import Fields from './Fields';
@@ -22,7 +22,7 @@ class FormWrapper extends React.Component {
         return (
             <Grid container direction="column" justify="center" alignItems="center">
                 <Grid item xs={12}>
-                    <h1>{title}</h1>
+                    <Typography variant="h5" color="inherit" >{title}</Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <ValidatorForm

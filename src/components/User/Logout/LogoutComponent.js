@@ -2,23 +2,28 @@ import React from 'react'
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { logoutActions } from '../../../redux';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const useStyles = theme => ({
     paper: {
         margin: theme.spacing(2),
         padding: theme.spacing(2)
+    },
+    spacer: {
+        margin: theme.spacing(2)
     }
 });
 
 class LogoutComponent extends React.Component {
 
     render() {
+        const {classes} = this.props;
+
         return (
             <React.Fragment>
                 <Grid item xs={12}>
-                    <h3>Are you sure you want to logout ?</h3>
+                    <Typography variant="h6" color="inherit" className={classes.spacer} >Are you sure you want to logout ?</Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container direction="row" justify="center" alignItems="center" spacing={2}>

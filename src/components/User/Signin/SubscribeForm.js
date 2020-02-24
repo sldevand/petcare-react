@@ -45,7 +45,7 @@ class SubscribeForm extends UserForm {
         const { email, firstName, lastName, password } = this.state;
 
         const fieldNames = ['email', 'firstName', 'lastName', 'password'];
-        const submitButton = <Button type="submit" variant="contained" color="primary">Sign up</Button>
+        const submitButton = <Button type="submit" variant="contained" color="primary">Sign in</Button>
 
         return (
             <React.Fragment>

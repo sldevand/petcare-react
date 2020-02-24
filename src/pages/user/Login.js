@@ -10,7 +10,7 @@ import GridPaper from './../../components/Container/GridPaper';
 
 const useStyles = theme => ({
     button: {
-        margin: theme.spacing(4)
+        marginTop: theme.spacing(3)
     }
 });
 

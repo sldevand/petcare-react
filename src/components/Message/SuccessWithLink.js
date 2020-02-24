@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
-import { Grid, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { Grid, Button, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+
+const useStyles = theme => ({
+    spacer: {
+        marginBottom: theme.spacing(2),
+    }
+});
 
 class SuccessWithLink extends Component {
 
     render() {
-        const { message, to, title } = this.props;
+        const { message, to, title, classes } = this.props;
 
         return (
             <Grid container direction="column" justify="center" alignItems="center">
-                <Grid item xs={12}>
-                    <h3>{message}</h3>
+                <Grid item className={classes.spacer} >
+                    <Typography variant="h6" color="inherit" >{message}</Typography>
                 </Grid>
                 <Grid item>
                     <Button variant="outlined" color="secondary" component={Link} to={to}>{title}</Button>
@@ -20,4 +27,4 @@ class SuccessWithLink extends Component {
     }
 }
 
-export default SuccessWithLink;
+export default  withStyles(useStyles)(SuccessWithLink);

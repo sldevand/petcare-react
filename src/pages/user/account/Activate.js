@@ -2,15 +2,19 @@ import React from 'react';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Grid, Button } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { userActions } from '../../../redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Link } from 'react-router-dom';
+import SuccessWithLink from '../../../components/Message/SuccessWithLink';
+import GridPaper from '../../../components/Container/GridPaper';
 
 const useStyles = theme => ({
     paper: {
         margin: theme.spacing(2),
         padding: theme.spacing(2)
+    },
+    spacer: {
+        margin: theme.spacing(2),
     }
 });
 
@@ -23,23 +27,19 @@ class Activate extends React.Component {
     render() {
         const { classes, message, loaded } = this.props;
 
-        let content = <CircularProgress />;
-        if (loaded) {
-            content =
-                <React.Fragment>
-                    <h3>{message}</h3>
-                    <Button variant="contained" color="primary" component={Link} to={'/login'}>Go to Login Form</Button>
-                </React.Fragment>
-        }        
+        let content = loaded
+            ? <SuccessWithLink message={message} to="/login" title="Login" />
+            : <CircularProgress />;
 
         return (
-            <Paper className={classes.paper} elevation={3} >
-                <Grid container direction="column" justify="center" alignItems="center">
-                    <h1>User Activation</h1>
+            <GridPaper>
+                <Grid item>
+                    <Typography variant="h5" color="inherit" >User Activation</Typography>
+                </Grid>
+                <Grid item className={classes.spacer}>
                     {content}
                 </Grid>
-            </Paper>
-
+            </GridPaper>
         );
     }
 }

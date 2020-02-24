@@ -37,7 +37,7 @@ class App extends React.Component {
           </header>
 
           <Switch>
-            <Route path="/" exact render={(props) => <Home title={this.state.title} />} />
+            <Route path="/" exact render={(props) => <Home />} />
             <Route path="/account" exact component={Account} />
             <Route path="/account/activate/:id/:activationCode" component={Activate} />
             <Route path="/subscribe" render={(routeProps) => <Signin {...routeProps} />} />

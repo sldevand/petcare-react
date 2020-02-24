@@ -43,9 +43,9 @@ class SimpleDrawer extends React.Component {
         let signupItem = '';
         if (!this.props.loggedIn) {
             signupItem =
-                <ListItem button key="Sign Up" component={Link} to="/subscribe">
+                <ListItem button key="Sign In" component={Link} to="/subscribe">
                     <ListItemIcon><AccountCircleIcon /></ListItemIcon>
-                    <ListItemText primary="Sign Up" />
+                    <ListItemText primary="Sign In" />
                 </ListItem>;
         } else {
             signupItem =
