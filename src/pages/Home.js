@@ -1,12 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import { Grid, Button, Fab, Typography } from '@material-ui/core';
+import { Fab } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import MainIcon from '../components/Icons/MainIcon';
 import PetList from '../components/Pet/PetList';
-import GridPaper from '../components/Container/GridPaper';
 import AddIcon from '@material-ui/icons/Add';
 import Welcome from '../components/Home/Welcome';
 

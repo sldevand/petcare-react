@@ -36,6 +36,7 @@ class PetAddEditForm extends UserForm {
                     fieldNames={fieldNames}
                     handleChange={this.handleChange}
                     handleDateChange={this.handleDateChange}
+                    handleFileUploadChange={this.handleFileUploadChange}
                     onSubmit={() => this.props.addPet(name, dob, specy, image)}
                     submitButton={submitButton}
                 />

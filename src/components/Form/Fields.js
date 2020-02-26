@@ -6,6 +6,7 @@ import LastName from './Field/LastName';
 import Name from './Field/Name';
 import Specy from './Field/Specy';
 import Dob from './Field/DatePicker/Dob';
+import ImageUploader from './Field/Upload/ImageUploader';
 
 class Fields extends Component {
     buildFields = (fieldNames) => {
@@ -24,7 +25,9 @@ class Fields extends Component {
                 case 'specy':
                     return <Specy key="specy" handleChange={this.props.handleChange} />
                 case 'dob':
-                    return <Dob key="dob" handleDateChange={this.props.handleDateChange}/>
+                    return <Dob key="dob" handleDateChange={this.props.handleDateChange} />
+                case 'image':
+                    return <ImageUploader key="image" handleFileUploadChange={this.props.handleFileUploadChange} />
                 default:
                     return null;
             }

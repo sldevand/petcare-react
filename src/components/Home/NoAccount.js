@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Typography, Button, Grid, Divider } from '@material-ui/core';
+import { Typography, Button} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const useStyles = theme => ({

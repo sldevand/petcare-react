@@ -14,6 +14,17 @@ class UserForm extends React.Component {
     handleDateChange = (dob) => {
         this.setState({dob});
     }
+
+    handleFileUploadChange = (event, name) => {
+        console.log(event)
+        let stateObject = function () {
+            let returnObj = {};
+            returnObj[name] = this.target.result;
+            return returnObj;
+        }.bind(event)();
+
+        this.setState(stateObject);
+    }
 }
 
 export default UserForm;

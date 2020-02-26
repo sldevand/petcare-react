@@ -27,4 +27,4 @@ class SuccessWithLink extends Component {
     }
 }
 
-export default  withStyles(useStyles)(SuccessWithLink);
+export default withStyles(useStyles)(SuccessWithLink);
