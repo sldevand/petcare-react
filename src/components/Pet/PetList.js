@@ -33,13 +33,15 @@ class PetList extends React.Component {
 
         return Object.keys(petsData).map((index) => {
             const pet = petsData[index];
+
+            let image = (pet.image) ? pet.image.image : pet.name; 
             let divider = (index < petsData.length - 1)
                 ? <Divider key={pet.id + "_divider"} variant="inset" component="li" />
                 : '';
 
             return (
                 <React.Fragment key={pet.id + "_frag"}>
-                    <PetItem key={pet.id} id={pet.id} name={pet.name} src={pet.image} dob={pet.dob} />
+                    <PetItem key={pet.id} id={pet.id} name={pet.name} src={image} dob={pet.dob} />
                     {divider}
                 </React.Fragment>
             )

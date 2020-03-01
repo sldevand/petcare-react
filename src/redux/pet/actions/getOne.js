@@ -4,38 +4,37 @@ import { petService } from "../../../services/pet.service"
 
 const request = () => {
     return {
-        type: petTypes.FETCH_PET_GET_IMAGE_REQUEST
+        type: petTypes.FETCH_PET_GET_ONE_REQUEST
     }
 }
 
 const success = message => {
     return {
-        type: petTypes.FETCH_PET_GET_IMAGE_SUCCESS,
+        type: petTypes.FETCH_PET_GET_ONE_SUCCESS,
         payload: message
     }
 }
 
 const failure = error => {
     return {
-        type: petTypes.FETCH_PET_GET_IMAGE_FAILURE,
+        type: petTypes.FETCH_PET_GET_ONE_FAILURE,
         payload: error
     }
 }
 
-const getPetImage = (id) => {
+const getOne = (name) => {
     return (dispatch) => {
         dispatch(request());
-        petService.getPetImage(id)
+        petService.getOne(name)
             .then(response => {
                 if (response.errors) {
-                    let getPetImageFailure = failure(response);
-                    dispatch(getPetImageFailure);
-                    dispatch(snackbarActions.open(getPetImageFailure.payload.errors, 'error'));
+                    let getFailure = failure(response);
+                    dispatch(getFailure);
+                    dispatch(snackbarActions.open(getFailure.payload.errors, 'error'));
                     return;
                 }
-                
-                let getPetImageSuccess = success(response);          
-                dispatch(getPetImageSuccess);
+         
+                dispatch(success(response));
             })
             .catch((response) => {
                 dispatch(failure(response));
@@ -43,4 +42,4 @@ const getPetImage = (id) => {
     }
 }
 
-export default getPetImage;
+export default getOne;

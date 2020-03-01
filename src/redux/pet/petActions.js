@@ -1,9 +1,9 @@
 import add from "./actions/add";
 import getList from "./actions/getList";
-import getPetImage from "./actions/getPetImage";
+import getOne from "./actions/getOne";
  
 export const petActions = {
     add,
     getList,
-    getPetImage
+    getOne
 }

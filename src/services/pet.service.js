@@ -17,14 +17,15 @@ async function getList() {
     return response;
 }
 
-async function getPetImage(id) {
-    let response = await api.handleSecuredGet('api/pets/image/' + id);
+async function getOne(name) {
+    let response = await api.handleSecuredGet('api/pets/' + name);
 
     return response;
 }
 
+
 export const petService = {
     add,
     getList,
-    getPetImage
+    getOne
 };
