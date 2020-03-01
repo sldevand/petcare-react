@@ -1,13 +1,12 @@
-import { petTypes } from './petTypes';
+import { petTypes } from '../petTypes';
 
 const initialState = {
     success: false,
     message: '',
-    loading: false,
-    data: []
+    loading: false
 };
 
-const petReducer = (state = initialState, action) => {
+const petAddReducer = (state = initialState, action) => {
     switch (action.type) {
         case petTypes.FETCH_PET_ADD_RESET:
             return {
@@ -41,4 +40,4 @@ const petReducer = (state = initialState, action) => {
     }
 }
 
-export default petReducer;
+export default petAddReducer;

@@ -17,7 +17,14 @@ async function getList() {
     return response;
 }
 
+async function getPetImage(id) {
+    let response = await api.handleSecuredGet('api/pets/image/' + id);
+
+    return response;
+}
+
 export const petService = {
     add,
-    getList
+    getList,
+    getPetImage
 };

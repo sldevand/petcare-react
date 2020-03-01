@@ -22,7 +22,7 @@ class PetAddEditForm extends UserForm {
         this.title = "Add/Edit Pet"
     }
 
-    render() {        
+    render() {
         const { loading } = this.props;
         const { name, dob, specy, image } = this.state;
 
@@ -48,7 +48,7 @@ class PetAddEditForm extends UserForm {
 
 const mapStateToProps = state => {
     return {
-        loading : state.petReducer.loading
+        loading : state.petAddReducer.loading
     };
 }
 

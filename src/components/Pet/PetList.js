@@ -39,7 +39,7 @@ class PetList extends React.Component {
 
             return (
                 <React.Fragment key={pet.id + "_frag"}>
-                    <PetItem key={pet.id} name={pet.name} src={pet.image} dob={pet.dob} />
+                    <PetItem key={pet.id} id={pet.id} name={pet.name} src={pet.image} dob={pet.dob} />
                     {divider}
                 </React.Fragment>
             )

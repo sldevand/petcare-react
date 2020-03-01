@@ -1,4 +1,4 @@
-import { petTypes } from './petTypes';
+import { petTypes } from '../petTypes';
 
 const initialState = {
     success: false,
@@ -7,9 +7,9 @@ const initialState = {
     data: []
 };
 
-const petListReducer = (state = initialState, action) => {
+const petGetImageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case petTypes.FETCH_PET_GET_LIST_REQUEST:
+        case petTypes.FETCH_PET_GET_IMAGE_REQUEST:
             return {
                 ...state,
                 success: false,
@@ -17,7 +17,7 @@ const petListReducer = (state = initialState, action) => {
                 loading: true,
                 data: []
             }
-        case petTypes.FETCH_PET_GET_LIST_SUCCESS:
+        case petTypes.FETCH_PET_GET_IMAGE_SUCCESS:
             return {
                 ...state,
                 success: action.payload.status,
@@ -25,7 +25,7 @@ const petListReducer = (state = initialState, action) => {
                 loading: false,
                 data: action.payload.data
             }
-        case petTypes.FETCH_PET_GET_LIST_FAILURE:
+        case petTypes.FETCH_PET_GET_IMAGE_FAILURE:
             return {
                 ...state,
                 success: action.payload.status,
@@ -37,4 +37,4 @@ const petListReducer = (state = initialState, action) => {
     }
 }
 
-export default petListReducer;
+export default petGetImageReducer;

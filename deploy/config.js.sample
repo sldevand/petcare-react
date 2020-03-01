@@ -1,0 +1,6 @@
+const config = {
+    apiUrl: "http://your/apiUrl",
+    baseUrl: "/petcare-react
+};
+
+export default config;
