@@ -34,7 +34,7 @@ class PetList extends React.Component {
         return Object.keys(petsData).map((index) => {
             const pet = petsData[index];
 
-            let image = (pet.image) ? pet.image.image : pet.name; 
+            let image = (pet.image) ? pet.image.thumbnail : pet.name; 
             let divider = (index < petsData.length - 1)
                 ? <Divider key={pet.id + "_divider"} variant="inset" component="li" />
                 : '';
