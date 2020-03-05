@@ -5,8 +5,13 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { Button, Grid, Typography, Divider } from '@material-ui/core';
 
 const styles = theme => ({
-    bottomSpacer: {
+    wrapper: {
+        width: '100%',
         marginBottom: theme.spacing(2)
+    },
+    image: {
+        marginTop:theme.spacing(2),
+        maxWidth:'100%'
     },
     divider: {
         width: '100%',
@@ -23,18 +28,19 @@ class ImageUploader extends React.Component {
     };
 
     state = {
-        images: []
+        image: ''
     };
 
     handleCapture = (event) => {
         const fileReader = new FileReader();
-        const name = event.target.accept.includes('image') ? 'images' : 'videos';
-
         fileReader.readAsDataURL(event.target.files[0]);
+
         fileReader.onload = (e) => {
-            this.setState((prevState) => ({
-                [name]: [...prevState[name], e.target.result]
-            }));
+            console.log(e.target.result);
+
+            this.setState({
+                image: e.target.result
+            });
 
             this.props.handleFileUploadChange(e, 'image');
         };
@@ -42,9 +48,10 @@ class ImageUploader extends React.Component {
 
     render() {
         const { classes } = this.props;
+        const { image } = this.state;
 
         return (
-            <Grid container direction="column" justify="center" alignItems="flex-end" className={classes.bottomSpacer} >
+            <Grid container direction="column" justify="center" alignItems="center" className={classes.wrapper} >
                 <Grid container direction="row" justify="space-between" alignItems="flex-end">
                     <Grid item >
                         <Typography color="inherit" >Image</Typography>
@@ -72,9 +79,11 @@ class ImageUploader extends React.Component {
                             </Button>
                         </label>
                     </Grid>
-
                 </Grid>
                 <Divider className={classes.divider} />
+                <Grid item>
+                    <img src={image} alt="" className={classes.image}/>
+                </Grid>
             </Grid>
         );
     }
