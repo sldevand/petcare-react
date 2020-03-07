@@ -4,7 +4,8 @@ const initialState = {
     success: false,
     message: '',
     loading: false,
-    data: []
+    data: [],
+    image: ''
 };
 
 const petOneReducer = (state = initialState, action) => {
@@ -15,7 +16,8 @@ const petOneReducer = (state = initialState, action) => {
                 success: false,
                 message: '',
                 loading: true,
-                data: []
+                data: [],
+                image:''
             }
         case petTypes.FETCH_PET_GET_ONE_SUCCESS:
             return {
@@ -23,7 +25,8 @@ const petOneReducer = (state = initialState, action) => {
                 success: action.payload.status,
                 message: action.payload.errors,
                 loading: false,
-                data: action.payload.data
+                data: action.payload.data,
+                image:action.payload.data.image.image
             }
         case petTypes.FETCH_PET_GET_ONE_FAILURE:
             return {
@@ -31,7 +34,8 @@ const petOneReducer = (state = initialState, action) => {
                 success: action.payload.status,
                 message: action.payload.errors,
                 loading: false,
-                data: []
+                data: [],
+                image:''
             }
         default: return state;
     }
