@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Typography, Card, CardActionArea, CardMedia, CardContent, Button, CardActions } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -36,13 +36,40 @@ class PetInfos extends React.Component {
         const { name, specy, dob } = this.props.data;
 
         return (
-            <React.Fragment>
-                <img src={image} alt="No Image" className={classes.image}></img>
-                <Typography variant="h5" color="inherit" >{name}</Typography>
-                <Typography variant="h6" color="inherit" >{specy}</Typography>
-                <Typography variant="h6" color="inherit" >{dob}</Typography>
-                <SimpleBackdrop open={loading} />
-            </React.Fragment>
+
+<Card className={classes.root}>
+      <CardActionArea>
+        <CardMedia
+          className={classes.media}
+          image={image}
+          title={name}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {name}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {dob}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Share
+        </Button>
+        <Button size="small" color="primary">
+          Learn More
+        </Button>
+      </CardActions>
+    </Card>
+
+            // <React.Fragment>
+            //     <img src={image} alt="No Image" className={classes.image}></img>
+            //     <Typography variant="h5" color="inherit" >{name}</Typography>
+            //     <Typography variant="h6" color="inherit" >{specy}</Typography>
+            //     <Typography variant="h6" color="inherit" >{dob}</Typography>
+            //     <SimpleBackdrop open={loading} />
+            // </React.Fragment>
         );
     }
 }
