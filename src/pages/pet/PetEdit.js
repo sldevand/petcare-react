@@ -4,7 +4,7 @@ import PetEditForm from '../../components/Pet/PetEditForm'
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 
-class PetAdd extends React.Component {
+class PetEdit extends React.Component {
     render() {
         const { success, loggedIn } = this.props;
 
@@ -29,4 +29,4 @@ const mapStateToProps = state => {
 
 export default compose(
     connect(mapStateToProps)
-)(PetAdd);
+)(PetEdit);

@@ -27,31 +27,39 @@ class PetEditForm extends UserForm {
         this.props.getOne(name);
     }
 
+    componentWillReceiveProps(nextProps) {
+        const { id, name, dob, specy } = nextProps.data;
+        const { image } = nextProps;
+        this.setState({ id, name, dob, specy, image });
+    }
+
     render() {
-        const { loading, image } = this.props;
-        const { id, name, dob, specy} = this.props.data;
+        const { loading, loadingGetOne } = this.props;
+        const { id, name, dob, specy, image } = this.state;
+
+        let loadingValue = loadingGetOne ? loadingGetOne : loading;
 
         const submitButton = <Button type="submit" variant="contained" color="primary">{this.title}</Button>
 
-        this.fields = [
-            {'type':'name','value':name},
-            {'type':'dob','value':dob},
-            {'type':'specy','value':specy},
-            {'type':'image','value':image},
+        const fields = [
+            { 'type': 'name', 'value': name },
+            { 'type': 'dob', 'value': dob },
+            { 'type': 'specy', 'value': specy },
+            { 'type': 'image', 'value': image },
         ];
 
         return (
             <React.Fragment>
                 <FormWrapper
                     title={this.title}
-                    fieldNames={this.fields}
+                    fieldNames={fields}
                     handleChange={this.handleChange}
                     handleDateChange={this.handleDateChange}
                     handleFileUploadChange={this.handleFileUploadChange}
-                    onSubmit={() => this.props.updatePet(id, name, dob, specy, image)}
+                    onSubmit={() => this.props.update(id, name, dob, specy, image)}
                     submitButton={submitButton}
                 />
-                <SimpleBackdrop open={loading} />
+                <SimpleBackdrop open={loadingValue} />
             </React.Fragment>
         );
     }
@@ -59,7 +67,8 @@ class PetEditForm extends UserForm {
 
 const mapStateToProps = state => {
     return {
-        loading: state.petAddReducer.loading,
+        loading: state.petUpdateReducer.loading,
+        loadingGetOne: state.petOneReducer.loading,
         data: state.petOneReducer.data,
         image: state.petOneReducer.image
     };
@@ -67,8 +76,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updatePet: (id, name, dob, specy, image) => {
-            dispatch(petActions.updatePet(id, name, dob, specy, image))
+        update: (id, name, dob, specy, image) => {
+            dispatch(petActions.update(id, name, dob, specy, image))
         },
         getOne: (name) => {
             dispatch(petActions.getOne(name))

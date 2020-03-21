@@ -16,20 +16,21 @@ class PetAddForm extends UserForm {
         image: ''
     };
 
-    fields = [
-        {'type':'name','value':''},
-        {'type':'dob','value':''},
-        {'type':'specy','value':''},
-        {'type':'image','value':''},
-    ];
+    constructor(props) {
+        super(props);
+        this.title="Add Pets";
+    }
 
     render() {
         const { loading } = this.props;
         const { name, dob ,specy, image } = this.state;
 
-        
-
-        this.title = "Add Pet";
+        const fields = [
+            {'type':'name','value':name},
+            {'type':'dob','value':dob},
+            {'type':'specy','value':specy},
+            {'type':'image','value':image},
+        ];
 
         const submitButton = <Button type="submit" variant="contained" color="primary">{this.title}</Button>
 
@@ -37,7 +38,7 @@ class PetAddForm extends UserForm {
             <React.Fragment>
                 <FormWrapper
                     title={this.title}
-                    fieldNames={this.fields}
+                    fieldNames={fields}
                     handleChange={this.handleChange}
                     handleDateChange={this.handleDateChange}
                     handleFileUploadChange={this.handleFileUploadChange}

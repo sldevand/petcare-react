@@ -11,6 +11,17 @@ async function add(name, dob, specy, image) {
     return response;
 }
 
+async function update(id, name, dob, specy, image) {
+    let response = await api.handleSecuredPut(
+        `api/pets/${id}`,
+        {
+            name, dob, specy, image
+        }
+    );
+
+    return response;
+}
+
 async function getList() {
     let response = await api.handleSecuredGet('api/pets');
 
@@ -26,6 +37,7 @@ async function getOne(name) {
 
 export const petService = {
     add,
+    update,
     getList,
     getOne
 };

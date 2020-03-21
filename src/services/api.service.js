@@ -5,7 +5,8 @@ export const api = {
     handlePost,
     handleGet,
     handleSecuredGet,
-    handleSecuredPost
+    handleSecuredPost,
+    handleSecuredPut
 };
 
 async function handlePost(endpoint, body) {
@@ -21,6 +22,17 @@ async function handleSecuredPost(endpoint, body) {
     }
 
     let json = await handleRequest('POST', endpoint, headers, body);
+
+    return json;
+}
+
+async function handleSecuredPut(endpoint, body) {
+    const apiKey = storageService.getApiKey();
+    let headers = {
+        'Authorization':'Bearer ' + apiKey
+    }
+
+    let json = await handleRequest('PUT', endpoint, headers, body);
 
     return json;
 }

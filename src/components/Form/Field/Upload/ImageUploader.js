@@ -18,7 +18,6 @@ const styles = theme => ({
         height: '1px',
         marginTop: theme.spacing(1),
         backgroundColor: '#808080'
-
     }
 });
 
@@ -27,29 +26,17 @@ class ImageUploader extends React.Component {
         classes: PropTypes.object.isRequired
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            image: this.props.value
-        };
-    }
-
     handleCapture = (event) => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(event.target.files[0]);
 
         fileReader.onload = (e) => {
-            this.setState({
-                image: e.target.result
-            });
-
             this.props.handleFileUploadChange(e, 'image');
         };
     };
 
     render() {
-        const { classes } = this.props;
-        const { image } = this.state;
+        const { classes, value } = this.props;
 
         return (
             <Grid container direction="column" justify="center" alignItems="center" className={classes.wrapper} >
@@ -83,7 +70,7 @@ class ImageUploader extends React.Component {
                 </Grid>
                 <Divider className={classes.divider} />
                 <Grid item>
-                    <img src={image} alt="" className={classes.image}/>
+                    <img src={value} alt="" className={classes.image}/>
                 </Grid>
             </Grid>
         );

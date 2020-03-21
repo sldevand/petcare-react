@@ -6,6 +6,7 @@ import signupReducer from './signup/signupReducer';
 import snackbarReducer from './snackbar/snackbarReducer';
 import passwordReducer from './password/passwordReducer';
 import petAddReducer from './pet/reducers/petAddReducer';
+import petUpdateReducer from './pet/reducers/petUpdateReducer';
 import petListReducer from './pet/reducers/petListReducer';
 import petOneReducer from './pet/reducers/petOneReducer';
 import thunk from 'redux-thunk';
@@ -21,6 +22,7 @@ const allReducers = combineReducers({
     snackbarReducer,
     passwordReducer,
     petAddReducer,
+    petUpdateReducer,
     petListReducer,
     petOneReducer
 });

@@ -1,16 +1,26 @@
 import React from 'react'
+import TextValidator from 'react-material-ui-form-validator/lib/TextValidator'
 
 class AbstractTextField extends React.Component {
 
     handleChange = (event) => {
-        let stateObject = function () {
-            let returnObj = {};
-            returnObj[this.target.name] = this.target.value;
-            return returnObj;
-        }.bind(event)();
-
-        this.setState(stateObject);
         this.props.handleChange(event);
+    }
+
+    render() {
+        const { value } = this.props;
+
+        return (
+            <TextValidator
+                label={this.label}
+                onChange={this.handleChange}
+                name={this.name}
+                value={value || ""}
+                type={this.type}
+                validators={this.validators}
+                errorMessages={this.errorMessages}
+            />
+        )
     }
 }
 

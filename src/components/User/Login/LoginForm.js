@@ -17,20 +17,23 @@ class LoginForm extends UserForm {
     constructor() {
         super()
         this.title = "Log In"
+        this.fields = [
+            {'type':'email', 'value':''},
+            {'type':'password', 'value':''}
+        ]
     }
 
     render() {
         const { loading } = this.props;
         const { email, password } = this.state;
 
-        const fieldNames = ['email', 'password'];
         const submitButton = <Button type="submit" variant="contained" color="primary">Log In</Button>
 
         return (
             <React.Fragment>
                 <FormWrapper
                     title={this.title}
-                    fieldNames={fieldNames}
+                    fieldNames={this.fields}
                     handleChange={this.handleChange}
                     onSubmit={() => this.props.login(email, password)}
                     submitButton={submitButton}

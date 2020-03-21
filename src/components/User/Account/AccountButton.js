@@ -19,7 +19,7 @@ const useStyles = theme => ({
 });
 
 class AccountButton extends React.Component {
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.props.isLoggedIn();
     }
 

@@ -29,6 +29,12 @@ class SubscribeForm extends UserForm {
     constructor() {
         super();
         this.title = 'Sign In'
+        this.fields = [
+            {'type':'email', 'value':''},
+            {'type':'firstName', 'value':''},
+            {'type':'lastName', 'value':''},
+            {'type':'password', 'value':''},
+        ]
     }
 
     componentDidMount() {
@@ -44,14 +50,13 @@ class SubscribeForm extends UserForm {
         const { loading } = this.props;
         const { email, firstName, lastName, password } = this.state;
 
-        const fieldNames = ['email', 'firstName', 'lastName', 'password'];
         const submitButton = <Button type="submit" variant="contained" color="primary">Sign in</Button>
 
         return (
             <React.Fragment>
                 <FormWrapper
                     title={this.title}
-                    fieldNames={fieldNames}
+                    fieldNames={this.fields}
                     handleChange={this.handleChange}
                     onSubmit={() => this.props.signup(email, firstName, lastName, password)}
                     submitButton={submitButton}
