@@ -1,6 +1,6 @@
 import React from 'react'
 import GridPaper from '../../components/Container/GridPaper'
-import PetAddEditForm from '../../components/Pet/PetAddEditForm'
+import PetEditForm from '../../components/Pet/PetEditForm'
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 
@@ -14,7 +14,7 @@ class PetAdd extends React.Component {
 
         return (
             <GridPaper>
-                <PetAddEditForm></PetAddEditForm>
+                <PetEditForm routeMatch={this.props.match} routeHistory={this.props.history}></PetEditForm>
             </GridPaper>
         )
     }

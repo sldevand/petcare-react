@@ -5,11 +5,11 @@ import AbstractTextField from './AbstractTextField';
 class LastName extends AbstractTextField {
 
     state = {
-        lastName: ''
+        lastName: this.props.value
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.label = 'Last name';
         this.name  = 'lastName';
         this.validators = ['required', 'minStringLength:3', 'maxStringLength:64', 'matchRegexp:^[a-zA-Z-]*$'];

@@ -10,24 +10,24 @@ import ImageUploader from './Field/Upload/ImageUploader';
 
 class Fields extends Component {
     buildFields = (fieldNames) => {
-        return fieldNames.map(field => {
-            switch (field) {
+        return fieldNames.map((field) => {
+            switch (field.type) {
                 case 'email':
-                    return <Email key="email" handleChange={this.props.handleChange} />
+                    return <Email key="email" handleChange={this.props.handleChange} value={field.value}/>
                 case 'password':
-                    return <Password key="password" handleChange={this.props.handleChange} />
+                    return <Password key="password" handleChange={this.props.handleChange} value={field.value}/>
                 case 'firstName':
-                    return <FirstName key="firstName" handleChange={this.props.handleChange} />
+                    return <FirstName key="firstName" handleChange={this.props.handleChange} value={field.value}/>
                 case 'lastName':
-                    return <LastName key="lastName" handleChange={this.props.handleChange} />
+                    return <LastName key="lastName" handleChange={this.props.handleChange}  value={field.value} />
                 case 'name':
-                    return <Name key="name" handleChange={this.props.handleChange} />
+                    return <Name key="name" handleChange={this.props.handleChange} value={field.value}/>
                 case 'specy':
-                    return <Specy key="specy" handleChange={this.props.handleChange} />
+                    return <Specy key="specy" handleChange={this.props.handleChange} value={field.value}/>
                 case 'dob':
-                    return <Dob key="dob" handleDateChange={this.props.handleDateChange} />
+                    return <Dob key="dob" handleDateChange={this.props.handleDateChange} value={field.value}/>
                 case 'image':
-                    return <ImageUploader key="image" handleFileUploadChange={this.props.handleFileUploadChange} />
+                    return <ImageUploader key="image" handleFileUploadChange={this.props.handleFileUploadChange} value={field.value} />
                 default:
                     return null;
             }

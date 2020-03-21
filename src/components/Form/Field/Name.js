@@ -5,15 +5,15 @@ import AbstractTextField from './AbstractTextField';
 class Name extends AbstractTextField {
 
     state = {
-        name: ''
-    }
+        name : this.props.value
+    };
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.label = 'Name';
         this.name  = 'name';
         this.validators = ['required', 'minStringLength:3', 'maxStringLength:64', 'matchRegexp:^[a-zA-Z- ]*$'];
-        this.errorMessages = ['This field is required', 'Minimum 3 characters', 'Maximum 64 characters', 'Lowercase and uppercase letters only'];
+        this.errorMessages = ['This field is required', 'Minimum 3 characters', 'Maximum 64 characters', 'Lowercase and uppercase letters only'];       
     }
 
     render() {

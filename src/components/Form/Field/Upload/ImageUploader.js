@@ -27,17 +27,18 @@ class ImageUploader extends React.Component {
         classes: PropTypes.object.isRequired
     };
 
-    state = {
-        image: ''
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            image: this.props.value
+        };
+    }
 
     handleCapture = (event) => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(event.target.files[0]);
 
         fileReader.onload = (e) => {
-            console.log(e.target.result);
-
             this.setState({
                 image: e.target.result
             });

@@ -4,9 +4,15 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 import DateFnsUtils from '@date-io/date-fns';
 
 class Dob extends React.Component {
-
-    state = {
-        selectedDate: new Date()
+    constructor(props){
+        super(props);
+        let date = new Date();
+        if(this.props.value) {
+            date = new Date(this.props.value)
+        }
+        this.state = {
+            selectedDate: date
+        }
     }
 
     handleDateChange = selectedDate => {

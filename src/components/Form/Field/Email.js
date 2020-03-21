@@ -5,11 +5,11 @@ import AbstractTextField from './AbstractTextField';
 class Email extends AbstractTextField {
 
     state = {
-        email: ''
+        email: this.props.value
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.label = 'Email';
         this.name  = 'email';
         this.validators = ['required', 'isEmail'];

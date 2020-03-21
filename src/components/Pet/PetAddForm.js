@@ -2,38 +2,42 @@ import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import Button from '@material-ui/core/Button';
-import FormWrapper from './../Form/FormWrapper';
-import SimpleBackdrop from './../Loader/SimpleBackdrop';
+import FormWrapper from '../Form/FormWrapper';
+import SimpleBackdrop from '../Loader/SimpleBackdrop';
 import { petActions } from '../../redux';
-import UserForm from './../User/UserForm';
+import UserForm from '../User/UserForm';
 
-class PetAddEditForm extends UserForm {
+class PetAddForm extends UserForm {
 
     state = {
-        id: '',
         name: '',
         dob: new Date(),
         specy: '',
         image: ''
     };
 
-    constructor() {
-        super()
-        this.title = "Add/Edit Pet"
-    }
+    fields = [
+        {'type':'name','value':''},
+        {'type':'dob','value':''},
+        {'type':'specy','value':''},
+        {'type':'image','value':''},
+    ];
 
     render() {
         const { loading } = this.props;
-        const { name, dob, specy, image } = this.state;
+        const { name, dob ,specy, image } = this.state;
 
-        const fieldNames = ['name','dob', 'specy', 'image'];
-        const submitButton = <Button type="submit" variant="contained" color="primary">Add Pet</Button>
+        
+
+        this.title = "Add Pet";
+
+        const submitButton = <Button type="submit" variant="contained" color="primary">{this.title}</Button>
 
         return (
             <React.Fragment>
                 <FormWrapper
                     title={this.title}
-                    fieldNames={fieldNames}
+                    fieldNames={this.fields}
                     handleChange={this.handleChange}
                     handleDateChange={this.handleDateChange}
                     handleFileUploadChange={this.handleFileUploadChange}
@@ -48,7 +52,7 @@ class PetAddEditForm extends UserForm {
 
 const mapStateToProps = state => {
     return {
-        loading : state.petAddReducer.loading
+        loading: state.petAddReducer.loading
     };
 }
 
@@ -62,4 +66,4 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps)
-)(PetAddEditForm);
+)(PetAddForm);

@@ -1,6 +1,6 @@
 import React from 'react'
 import GridPaper from '../../components/Container/GridPaper'
-import PetAddEditForm from '../../components/Pet/PetAddEditForm'
+import PetAddForm from '../../components/Pet/PetAddForm'
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 
@@ -14,7 +14,7 @@ class PetAdd extends React.Component {
 
         return (
             <GridPaper>
-                <PetAddEditForm></PetAddEditForm>
+                <PetAddForm></PetAddForm>
             </GridPaper>
         )
     }

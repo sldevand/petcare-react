@@ -37,7 +37,7 @@ class PetInfos extends React.Component {
         const { name, specy, dob } = this.props.data;
 
         return (
-            <React.Fragment  className={classes.root}>
+            <React.Fragment>
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
@@ -85,5 +85,5 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withStyles(styles, { withTheme: true })
+    withStyles(styles)
 )(PetInfos);
