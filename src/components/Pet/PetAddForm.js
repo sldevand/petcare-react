@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import FormWrapper from '../Form/FormWrapper';
 import SimpleBackdrop from '../Loader/SimpleBackdrop';
 import { petActions } from '../../redux';
-import UserForm from '../User/UserForm';
+import UserForm from '../Form/AbstractForm';
 
 class PetAddForm extends UserForm {
 

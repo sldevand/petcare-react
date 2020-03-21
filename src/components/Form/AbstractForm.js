@@ -1,6 +1,6 @@
 import React from 'react';
 
-class UserForm extends React.Component {
+class AbstractForm extends React.Component {
     handleChange = (event) => {
         let stateObject = function () {
             let returnObj = {};
@@ -12,7 +12,6 @@ class UserForm extends React.Component {
     }
 
     handleDateChange = (dob) => {
-        console.log(dob)
         this.setState({dob});
     }
 
@@ -27,4 +26,4 @@ class UserForm extends React.Component {
     }
 }
 
-export default UserForm;
+export default AbstractForm;

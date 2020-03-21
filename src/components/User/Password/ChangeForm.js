@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import UserForm from './../UserForm';
+import AbstractForm from './../../Form/AbstractForm';
 import { passwordActions } from '../../../redux';
 import FormWrapper from '../../Form/FormWrapper';
 import { Button } from '@material-ui/core';
 import SimpleBackdrop from '../../Loader/SimpleBackdrop';
 
-class ChangeForm extends UserForm {
+class ChangeForm extends AbstractForm {
     state = {
         email: '',
         password: ''
@@ -21,8 +21,11 @@ class ChangeForm extends UserForm {
     render() {
         const { email, password } = this.state;
         const { id, resetCode, loading } = this.props;
+        const fieldNames = [
+            { 'type': 'email', 'value': email },
+            { 'type': 'password', 'value': password }
+        ]
 
-        const fieldNames = ['email', 'password', 'confirmPassword']
         const submitButton = <Button type="submit" variant="contained" color="primary">Confirm</Button>
 
         return (

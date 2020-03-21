@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import UserForm from './../UserForm';
+import AbstractForm from '../../Form/AbstractForm';
 import { passwordActions } from '../../../redux';
 import FormWrapper from '../../Form/FormWrapper';
 import { Button } from '@material-ui/core';
 import SimpleBackdrop from '../../Loader/SimpleBackdrop';
 
-class ResetForm extends UserForm {
+class ResetForm extends AbstractForm {
     state = {
         email: ''
     }
@@ -21,7 +21,7 @@ class ResetForm extends UserForm {
         const { loading } = this.props;
         const { email } = this.state;
 
-        const fieldNames = ['email']
+        const fieldNames = [{ 'type': 'email', 'value': email }]
         const submitButton = <Button type="submit" variant="contained" color="primary">Send Mail</Button>
 
         return (

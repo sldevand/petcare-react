@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import Button from '@material-ui/core/Button';
-import UserForm from '../UserForm';
+import UserForm from '../../Form/AbstractForm';
 import { loginActions } from '../../../redux';
 import FormWrapper from '../../Form/FormWrapper';
 import SimpleBackdrop from '../../Loader/SimpleBackdrop';
@@ -17,15 +17,16 @@ class LoginForm extends UserForm {
     constructor() {
         super()
         this.title = "Log In"
-        this.fields = [
-            {'type':'email', 'value':''},
-            {'type':'password', 'value':''}
-        ]
     }
 
     render() {
         const { loading } = this.props;
         const { email, password } = this.state;
+
+        this.fields = [
+            { 'type': 'email', 'value': email },
+            { 'type': 'password', 'value': password }
+        ]
 
         const submitButton = <Button type="submit" variant="contained" color="primary">Log In</Button>
 
@@ -47,7 +48,7 @@ class LoginForm extends UserForm {
 const mapStateToProps = state => {
     return {
         loggedIn: state.loginReducer.loggedIn,
-        loading:  state.loginReducer.loading
+        loading: state.loginReducer.loading
     };
 }
 

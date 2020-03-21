@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import UserForm from '../UserForm';
+import AbstractForm from '../../Form/AbstractForm';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { signupActions } from '../../../redux';
 import FormWrapper from '../../Form/FormWrapper';
@@ -16,7 +16,7 @@ const useStyles = theme => ({
     }
 })
 
-class SubscribeForm extends UserForm {
+class SubscribeForm extends AbstractForm {
 
     state = {
         email: '',
@@ -29,12 +29,6 @@ class SubscribeForm extends UserForm {
     constructor() {
         super();
         this.title = 'Sign In'
-        this.fields = [
-            {'type':'email', 'value':''},
-            {'type':'firstName', 'value':''},
-            {'type':'lastName', 'value':''},
-            {'type':'password', 'value':''},
-        ]
     }
 
     componentDidMount() {
@@ -49,6 +43,13 @@ class SubscribeForm extends UserForm {
     render() {
         const { loading } = this.props;
         const { email, firstName, lastName, password } = this.state;
+
+        this.fields = [
+            { 'type': 'email', 'value': email },
+            { 'type': 'firstName', 'value': firstName },
+            { 'type': 'lastName', 'value': lastName },
+            { 'type': 'password', 'value': password },
+        ]
 
         const submitButton = <Button type="submit" variant="contained" color="primary">Sign in</Button>
 
