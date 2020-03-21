@@ -4,6 +4,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
+import DateHelper from '../../helpers/dateHelper';
 
 class PetItem extends React.Component {
     render() {
@@ -15,7 +16,7 @@ class PetItem extends React.Component {
                 <ListItemAvatar > 
                     <Avatar alt={name} src={src} />
                 </ListItemAvatar>
-                <ListItemText primary={name} secondary={dob} />
+                <ListItemText primary={name} secondary={DateHelper.getAge(dob) + ' Years old'}  />
             </ListItem>
         );
     }

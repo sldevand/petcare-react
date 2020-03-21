@@ -15,10 +15,11 @@ import Page404 from './pages/error/Page404';
 import config from './config';
 import PetAdd from './pages/pet/PetAdd';
 import PetIndex from './pages/pet/PetIndex';
+import PetEdit from './pages/pet/PetEdit';
 
 const useStyles = theme => ({
   app: {
-    height: '100vh',
+    height: '110vh',
     background: '#F0F0F0'
   }
 });
@@ -47,6 +48,7 @@ class App extends React.Component {
             <Route path="/passwordReset" exact render={(routeProps) => <Reset {...routeProps} />} />
             <Route path="/passwordChange/:id/:resetCode" component={Change} />} />
             <Route path="/pet/add" exact render={(routeProps) => <PetAdd {...routeProps} />} />} />
+            <Route path="/pet/edit/:name" exact render={(routeProps) => <PetEdit {...routeProps} />} />} />
             <Route path="/pet/:name" exact render={(routeProps) => <PetIndex {...routeProps} />} />} />
             <Route render={(routeProps) => <Page404 {...routeProps} />} />
           </Switch>

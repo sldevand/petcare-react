@@ -1,19 +1,16 @@
-import { Typography, Card, CardActionArea, CardMedia, CardContent, Button, CardActions } from '@material-ui/core';
+import { Typography, CardActionArea, CardMedia, CardContent, Button, CardActions } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { petActions } from '../../redux';
 import SimpleBackdrop from './../Loader/SimpleBackdrop';
+import DateHelper from '../../helpers/dateHelper';
 
 const styles = theme => ({
     wrapper: {
         width: '100%',
         marginBottom: theme.spacing(2)
-    },
-    image: {
-        marginTop:theme.spacing(2),
-        maxWidth:'100%'
     },
     divider: {
         width: '100%',
@@ -21,7 +18,11 @@ const styles = theme => ({
         marginTop: theme.spacing(1),
         backgroundColor: '#808080'
 
-    }
+    },
+    media: {
+        height: "300px",
+        borderRadius: 5
+    },
 });
 
 class PetInfos extends React.Component {
@@ -32,44 +33,36 @@ class PetInfos extends React.Component {
     }
 
     render() {
-        const {loading, classes, image} = this.props
+        const { loading, classes, image } = this.props
         const { name, specy, dob } = this.props.data;
 
         return (
-
-<Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={image}
-          title={name}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {dob}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
-    </Card>
-
-            // <React.Fragment>
-            //     <img src={image} alt="No Image" className={classes.image}></img>
-            //     <Typography variant="h5" color="inherit" >{name}</Typography>
-            //     <Typography variant="h6" color="inherit" >{specy}</Typography>
-            //     <Typography variant="h6" color="inherit" >{dob}</Typography>
-            //     <SimpleBackdrop open={loading} />
-            // </React.Fragment>
+            <React.Fragment  className={classes.root}>
+                <CardActionArea>
+                    <CardMedia
+                        className={classes.media}
+                        image={image}
+                        title={name}
+                        component="img"
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {name}
+                        </Typography>
+                        <Typography gutterBottom variant="h6" component="h6">
+                            {specy}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {DateHelper.getAge(dob)} Years old <br/>
+                            Born in {DateHelper.getDateOnly(dob)}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+                <CardActions>
+                    <Button size="small" color="primary">See Cares</Button>
+                </CardActions>
+                <SimpleBackdrop open={loading} />
+            </React.Fragment>
         );
     }
 }
@@ -78,7 +71,7 @@ const mapStateToProps = state => {
     return {
         loading: state.petOneReducer.loading,
         data: state.petOneReducer.data,
-        image:state.petOneReducer.image
+        image: state.petOneReducer.image
     };
 }
 

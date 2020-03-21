@@ -17,7 +17,7 @@ const useStyles = theme => ({
         margin: theme.spacing(2)
     },
     fab: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: theme.spacing(4),
         right: theme.spacing(4),
     },
