@@ -23,7 +23,7 @@ class PetEdit extends React.Component {
 const mapStateToProps = state => {
     return {
         loggedIn: state.loginReducer.loggedIn,
-        success: state.petAddReducer.success
+        success: state.petUpdateReducer.success
     };
 }
 

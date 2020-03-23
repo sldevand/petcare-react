@@ -20,7 +20,7 @@ const styles = theme => ({
 
     },
     media: {
-        height: "300px",
+        height: "240px",
         borderRadius: 5
     },
 });
