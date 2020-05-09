@@ -5,3 +5,4 @@ export {signupActions} from './signup/signupActions';
 export {snackbarActions} from './snackbar/snackbarActions';
 export {passwordActions} from './password/passwordActions';
 export {petActions} from './pet/petActions';
+export {careActions} from './care/careActions';

@@ -6,6 +6,7 @@ import compose from 'recompose/compose';
 import { petActions } from '../../redux';
 import SimpleBackdrop from './../Loader/SimpleBackdrop';
 import DateHelper from '../../helpers/dateHelper';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
     wrapper: {
@@ -59,7 +60,7 @@ class PetInfos extends React.Component {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary">See Cares</Button>
+                    <Button size="small" color="primary" component={Link} to={`/care/${name}`}>See Cares</Button>
                 </CardActions>
                 <SimpleBackdrop open={loading} />
             </React.Fragment>
