@@ -2,6 +2,7 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
+import DateHelper from '../../helpers/dateHelper';
 
 class CareItem extends React.Component {
     render() {
@@ -10,7 +11,7 @@ class CareItem extends React.Component {
         let to ='/care/' + petName + '/' + id;
         return (
             <ListItem button id={id} component={Link} to={to}>
-                <ListItemText primary={title} secondary={appointmentDate}  />
+                <ListItemText primary={title} secondary={DateHelper.toLocaleDateTimeString(appointmentDate)} />
             </ListItem>
         );
     }

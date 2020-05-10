@@ -4,8 +4,9 @@ import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import { Fab } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import AddIcon from '@material-ui/icons/Add';
-import CareList from '../../components/Care/CareList';
+import EditIcon from '@material-ui/icons/Edit';
+import CareInfos from '../../components/Care/CareInfos';
+import GridPaper from '../../components/Container/GridPaper';
 
 const useStyles = theme => ({
     fab: {
@@ -15,10 +16,11 @@ const useStyles = theme => ({
     },
 });
 
-class CareIndex extends React.Component {
+class CareSheet extends React.Component {
+
     render() {
         const { loggedIn, classes } = this.props;
-        const { name } = this.props.match.params;
+        const { name, id } = this.props.match.params;
 
         if (!loggedIn) {
             this.props.history.push(`/`);
@@ -26,13 +28,15 @@ class CareIndex extends React.Component {
 
         return (
             <React.Fragment>
-                <CareList routeMatch={this.props.match} routeHistory={this.props.history}></CareList>
+                <GridPaper>
+                    <CareInfos routeMatch={this.props.match} routeHistory={this.props.history}></CareInfos>
+                </GridPaper>
                 <Fab className={classes.fab}
                     size="large"
                     color="secondary"
-                    aria-label="add"
-                    component={Link} to={`/cares/add/${name}`}>
-                    <AddIcon />
+                    aria-label="edit"
+                    component={Link} to={`/cares/edit/${name}/${id}`}>
+                    <EditIcon />
                 </Fab>
             </React.Fragment>
         )
@@ -48,4 +52,4 @@ const mapStateToProps = state => {
 export default compose(
     withStyles(useStyles),
     connect(mapStateToProps)
-)(CareIndex);
+)(CareSheet);

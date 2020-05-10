@@ -4,8 +4,7 @@ const initialState = {
     success: false,
     message: '',
     loading: false,
-    data: [],
-    image: ''
+    data: []
 };
 
 const careOneReducer = (state = initialState, action) => {
@@ -16,8 +15,7 @@ const careOneReducer = (state = initialState, action) => {
                 success: false,
                 message: '',
                 loading: true,
-                data: [],
-                image:''
+                data: []
             }
         case careTypes.FETCH_CARE_GET_ONE_SUCCESS:
             return {
@@ -25,8 +23,7 @@ const careOneReducer = (state = initialState, action) => {
                 success: action.payload.status,
                 message: action.payload.errors,
                 loading: false,
-                data: action.payload.data,
-                image:action.payload.data.image.image
+                data: action.payload.data
             }
         case careTypes.FETCH_CARE_GET_ONE_FAILURE:
             return {
@@ -34,8 +31,7 @@ const careOneReducer = (state = initialState, action) => {
                 success: action.payload.status,
                 message: action.payload.errors,
                 loading: false,
-                data: [],
-                image:''
+                data: []
             }
         default: return state;
     }

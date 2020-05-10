@@ -22,10 +22,10 @@ const failure = error => {
     }
 }
 
-const getOne = (name) => {
+const getOne = (name, careId) => {
     return (dispatch) => {
         dispatch(request());
-        careService.getOne(name)
+        careService.getOne(name, careId)
             .then(response => {
                 if (response.errors) {
                     let getFailure = failure(response);

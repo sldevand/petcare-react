@@ -10,6 +10,12 @@ class DateHelper {
         let dob = new Date(dobStr);
         return dob.toLocaleDateString();
     }
+
+    static toLocaleDateTimeString(dateStr) {
+        let date = new Date(dateStr);
+
+        return `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
+    }
 }
 
 export default DateHelper;
