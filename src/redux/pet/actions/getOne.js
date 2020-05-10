@@ -35,7 +35,6 @@ const getOne = (name) => {
                 }
                 let getSuccess = failure(response);
                 dispatch(success(response));
-                dispatch(snackbarActions.open(getSuccess.payload.message, 'success'));
             })
             .catch((response) => {
                 let getFailure = failure(response);
