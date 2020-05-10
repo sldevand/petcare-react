@@ -2,12 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
-import GridPaper from '../Container/GridPaper';
-import { List, Divider, CircularProgress, Grid, Typography, CardActionArea, CardMedia, CardContent, Button, CardActions } from '@material-ui/core';
+import { Divider, CircularProgress, Grid, Typography} from '@material-ui/core';
 import { careActions } from '../../redux';
 import DateHelper from '../../helpers/dateHelper';
 import SimpleBackdrop from './../Loader/SimpleBackdrop';
-import { Link } from 'react-router-dom';
 import EventIcon from '@material-ui/icons/Event';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import DescriptionIcon from '@material-ui/icons/Description';
@@ -59,9 +57,7 @@ class CareInfos extends React.Component {
 
 
     render() {
-        const { careData, success, loading, classes } = this.props;
-        const { name } = this.props.routeMatch.params;
-
+        const { careData, loading, classes } = this.props;
         const content = this.createContent(loading, careData);
 
         return (

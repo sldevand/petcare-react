@@ -9,19 +9,18 @@ function myEcho(){
     echo "${green}--> $1 ${reset}"
 }
 
-myEcho "Executing remote script"
-
 REMOTE_HOST=pi@raspi3
 REMOTE_WWW_PATH=/var/www
 REMOTE_TMP_PATH=/home/pi/tmp
 REMOTE_APP_NAME=petcare-react
 REMOTE_APP_PATH=$REMOTE_WWW_PATH/$REMOTE_APP_NAME
 
-myEcho "***Remote : removing previous site***"
-sudo rm -rvf $REMOTE_WWW_PATH/$REMOTE_APP_NAME
+myEcho "Executing remote script" &&
+myEcho "***Remote : removing previous site***" &&
+sudo rm -rvf $REMOTE_WWW_PATH/$REMOTE_APP_NAME &&
 
-myEcho "Remote : Unzip from tmp folder to app folder"
-sudo mkdir $REMOTE_APP_PATH
+myEcho "Remote : Unzip from tmp folder to app folder" &&
+sudo mkdir $REMOTE_APP_PATH &&
 sudo unzip $REMOTE_TMP_PATH/$REMOTE_APP_NAME.zip -d $REMOTE_APP_PATH &&
 
 myEcho "Remote : Giving correct rights" &&
