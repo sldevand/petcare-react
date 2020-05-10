@@ -36,7 +36,7 @@ class App extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Router basename={config.baseUrl}>
+      <Router>
         <div className={classes.app}>
           <header className="App-header">
             <NavBar title={this.state.title} />
