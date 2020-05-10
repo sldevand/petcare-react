@@ -35,7 +35,7 @@ class CareSheet extends React.Component {
                     size="large"
                     color="secondary"
                     aria-label="edit"
-                    component={Link} to={`/cares/edit/${name}/${id}`}>
+                    component={Link} to={`/care/edit/${name}/${id}`}>
                     <EditIcon />
                 </Fab>
             </React.Fragment>

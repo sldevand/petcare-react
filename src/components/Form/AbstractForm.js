@@ -15,6 +15,10 @@ class AbstractForm extends React.Component {
         this.setState({dob});
     }
 
+    handleDateTimeChange = (appointmentDate) => {
+        this.setState({appointmentDate});
+    }
+
     handleFileUploadChange = (event, name) => {
         let stateObject = function () {
             let returnObj = {};

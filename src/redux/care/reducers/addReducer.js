@@ -8,28 +8,28 @@ const initialState = {
 
 const careAddReducer = (state = initialState, action) => {
     switch (action.type) {
-        case careTypes.FETCH_care_ADD_RESET:
+        case careTypes.FETCH_CARE_ADD_RESET:
             return {
                 ...state,
                 success: false,
                 message: '',
                 loading: false,
             }
-        case careTypes.FETCH_care_ADD_REQUEST:
+        case careTypes.FETCH_CARE_ADD_REQUEST:
             return {
                 ...state,
                 success: false,
                 message: '',
                 loading: true
             }
-        case careTypes.FETCH_care_ADD_SUCCESS:
+        case careTypes.FETCH_CARE_ADD_SUCCESS:
             return {
                 ...state,
                 success: action.payload.status,
                 message: action.payload.message,
                 loading: false
             }
-        case careTypes.FETCH_care_ADD_FAILURE:
+        case careTypes.FETCH_CARE_ADD_FAILURE:
             return {
                 ...state,
                 success: action.payload.status,

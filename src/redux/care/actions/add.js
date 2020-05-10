@@ -28,10 +28,10 @@ const failure = error => {
     }
 }
 
-const add = (name, dob, specy, image) => {
+const add = (name, title, appointmentDate, content) => {
     return (dispatch) => {
         dispatch(request());
-        careService.add(name, dob, specy, image)
+        careService.add(name, title, appointmentDate, content)
             .then(response => {
                 if (response.errors) {
                     let careAddFailure = failure(response);
@@ -46,7 +46,9 @@ const add = (name, dob, specy, image) => {
                 dispatch(reset());
             })
             .catch((response) => {
-                dispatch(failure(response));
+                let careAddFailure = failure(response);
+                    dispatch(careAddFailure);
+                    dispatch(snackbarActions.open(response.message, 'error'));
             })
     }
 }

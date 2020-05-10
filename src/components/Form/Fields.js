@@ -7,25 +7,34 @@ import Name from './Field/Name';
 import Specy from './Field/Specy';
 import Dob from './Field/DatePicker/Dob';
 import ImageUploader from './Field/Upload/ImageUploader';
+import Title from './Field/Title';
+import Content from './Field/Content';
+import DateTimePicker from './Field/DatePicker/DateTimePicker';
 
 class Fields extends Component {
     buildFields = (fieldNames) => {
         return fieldNames.map((field) => {
             switch (field.type) {
                 case 'email':
-                    return <Email key="email" handleChange={this.props.handleChange} value={field.value}/>
+                    return <Email key="email" handleChange={this.props.handleChange} value={field.value} />
                 case 'password':
-                    return <Password key="password" handleChange={this.props.handleChange} value={field.value}/>
+                    return <Password key="password" handleChange={this.props.handleChange} value={field.value} />
                 case 'firstName':
-                    return <FirstName key="firstName" handleChange={this.props.handleChange} value={field.value}/>
+                    return <FirstName key="firstName" handleChange={this.props.handleChange} value={field.value} />
                 case 'lastName':
-                    return <LastName key="lastName" handleChange={this.props.handleChange}  value={field.value} />
+                    return <LastName key="lastName" handleChange={this.props.handleChange} value={field.value} />
+                case 'title':
+                    return <Title key="title" handleChange={this.props.handleChange} value={field.value} />
                 case 'name':
-                    return <Name key="name" handleChange={this.props.handleChange} value={field.value}/>
+                    return <Name key="name" handleChange={this.props.handleChange} value={field.value} />
+                case 'content':
+                    return <Content key="content" handleChange={this.props.handleChange} value={field.value} />
+                case 'datetimepicker':
+                    return <DateTimePicker key={field.id} id={field.id} handleDateTimeChange={this.props.handleDateTimeChange} label={field.label} value={field.value}/>
                 case 'specy':
-                    return <Specy key="specy" handleChange={this.props.handleChange} value={field.value}/>
+                    return <Specy key="specy" handleChange={this.props.handleChange} value={field.value} />
                 case 'dob':
-                    return <Dob key="dob" handleDateChange={this.props.handleDateChange} value={field.value}/>
+                    return <Dob key="dob" handleDateChange={this.props.handleDateChange} value={field.value} />
                 case 'image':
                     return <ImageUploader key="image" handleFileUploadChange={this.props.handleFileUploadChange} value={field.value} />
                 default:

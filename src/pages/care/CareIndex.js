@@ -31,7 +31,7 @@ class CareIndex extends React.Component {
                     size="large"
                     color="secondary"
                     aria-label="add"
-                    component={Link} to={`/cares/add/${name}`}>
+                    component={Link} to={`/care/add/${name}`}>
                     <AddIcon />
                 </Fab>
             </React.Fragment>

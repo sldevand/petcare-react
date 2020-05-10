@@ -28,10 +28,10 @@ const failure = error => {
     }
 }
 
-const update = (id, name, dob, specy, image) => {
+const update = (id, name, title, appointmentDate, content) => {
     return (dispatch) => {
         dispatch(request());
-        careService.update(id, name, dob, specy, image)
+        careService.update(id, name, title, appointmentDate, content)
             .then(response => {
                 if (response.errors) {
                     let careUpdateFailure = failure(response);

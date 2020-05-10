@@ -42,7 +42,7 @@ class PetInfos extends React.Component {
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        image={image}
+                        image={image || ''}
                         title={name}
                         component="img"
                     />

@@ -33,11 +33,14 @@ const getOne = (name) => {
                     dispatch(snackbarActions.open(getFailure.payload.errors, 'error'));
                     return;
                 }
-         
+                let getSuccess = failure(response);
                 dispatch(success(response));
+                dispatch(snackbarActions.open(getSuccess.payload.message, 'success'));
             })
             .catch((response) => {
-                dispatch(failure(response));
+                let getFailure = failure(response);
+                dispatch(getFailure);
+                dispatch(snackbarActions.open(response.message, 'error'));
             })
     }
 }

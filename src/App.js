@@ -18,6 +18,8 @@ import PetIndex from './pages/pet/PetIndex';
 import PetEdit from './pages/pet/PetEdit';
 import CareIndex from './pages/care/CareIndex';
 import CareSheet from './pages/care/CareSheet';
+import CareAdd from './pages/care/CareAdd';
+import CareEdit from './pages/care/CareEdit';
 
 const useStyles = theme => ({
   app: {
@@ -53,7 +55,9 @@ class App extends React.Component {
             <Route path="/pet/edit/:name" exact render={(routeProps) => <PetEdit {...routeProps} />} />} />
             <Route path="/pet/:name" exact render={(routeProps) => <PetIndex {...routeProps} />} />} />
             <Route path="/care/:name" exact render={(routeProps) => <CareIndex {...routeProps} />} />} />
-            <Route path="/care/:name/:id" exact render={(routeProps) => <CareSheet {...routeProps} />} />} />
+            <Route path="/care/add/:name" exact render={(routeProps) => <CareAdd {...routeProps} />} />} />
+            <Route path="/care/edit/:name/:id" exact render={(routeProps) => <CareEdit {...routeProps} />} />} />
+            <Route path="/care/:name/:id" exact render={(routeProps) => <CareSheet {...routeProps} />} />} />            
             <Route render={(routeProps) => <Page404 {...routeProps} />} />
           </Switch>
           <MessageSnackBar />

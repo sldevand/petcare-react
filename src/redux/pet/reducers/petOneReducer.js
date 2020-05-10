@@ -17,16 +17,21 @@ const petOneReducer = (state = initialState, action) => {
                 message: '',
                 loading: true,
                 data: [],
-                image:''
+                image: ''
             }
         case petTypes.FETCH_PET_GET_ONE_SUCCESS:
+            let image = ''
+            if (null != action.payload.data.image) {
+                image = action.payload.data.image.image;
+            }
+
             return {
                 ...state,
                 success: action.payload.status,
                 message: action.payload.errors,
                 loading: false,
                 data: action.payload.data,
-                image:action.payload.data.image.image
+                image: image
             }
         case petTypes.FETCH_PET_GET_ONE_FAILURE:
             return {
@@ -35,7 +40,7 @@ const petOneReducer = (state = initialState, action) => {
                 message: action.payload.errors,
                 loading: false,
                 data: [],
-                image:''
+                image: ''
             }
         default: return state;
     }

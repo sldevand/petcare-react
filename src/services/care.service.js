@@ -1,21 +1,21 @@
 import { api } from './api.service';
 
-async function add(name, title, content, appointmentDate) {
+async function add(name, title, appointmentDate, content) {
     let response = await api.handleSecuredPost(
         `api/cares/${name}`,
         {
-            title, content, appointmentDate
+            title, appointmentDate, content
         }
     );
 
     return response;
 }
 
-async function update(name, careId, title, content, appointmentDate) {
+async function update(id, name, title, appointmentDate, content) {
     let response = await api.handleSecuredPut(
-        `api/cares/${name}/${careId}`,
+        `api/cares/${name}/${id}`,
         {
-            title, content, appointmentDate
+            title, appointmentDate, content
         }
     );
 

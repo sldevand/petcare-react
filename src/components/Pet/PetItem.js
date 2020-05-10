@@ -9,8 +9,8 @@ import DateHelper from '../../helpers/dateHelper';
 class PetItem extends React.Component {
     render() {
         const { id, name, dob, src } = this.props;
+        const to ='/pet/' + name;
 
-        let to ='/pet/' + name;
         return (
             <ListItem button id={id} component={Link} to={to}>
                 <ListItemAvatar > 
