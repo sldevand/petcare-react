@@ -11,7 +11,7 @@ class CareItem extends React.Component {
         let to ='/care/' + petName + '/' + id;
         return (
             <ListItem button id={id} component={Link} to={to}>
-                <ListItemText primary={title} secondary={DateHelper.toLocaleDateTimeString(appointmentDate)} />
+                <ListItemText primary={title} secondary={DateHelper.toLocaleDateTimeString(appointmentDate, 'fr-FR')} />
             </ListItem>
         );
     }

@@ -2,6 +2,7 @@ import 'date-fns';
 import React from 'react';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import DateHelper from '../../../../helpers/dateHelper';
 
 class Dob extends React.Component {
     handleDateChange = selectedDate => {
@@ -17,7 +18,7 @@ class Dob extends React.Component {
                     margin="normal"
                     id="dob"
                     label="Date Of Birth"
-                    format="MM/dd/yyyy"
+                    format={DateHelper.getDateTimeFormatFromLocale('fr-FR')}
                     value={value || new Date()}
                     onChange={this.handleDateChange}
                     KeyboardButtonProps={{

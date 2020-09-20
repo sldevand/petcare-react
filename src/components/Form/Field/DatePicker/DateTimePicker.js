@@ -1,7 +1,8 @@
 import 'date-fns';
 import React from 'react';
-import { MuiPickersUtilsProvider,  KeyboardDateTimePicker } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import DateHelper from '../../../../helpers/dateHelper';
 
 class DateTimePicker extends React.Component {
     handleDateTimeChange = selectedDateTime => {
@@ -17,9 +18,10 @@ class DateTimePicker extends React.Component {
                     margin="normal"
                     id={id}
                     label={label}
-                    format="MM/dd/yyyy hh:mm:ss"
+                    format={DateHelper.getDateTimeFormatFromLocale('fr-FR', true)}
                     value={value || new Date()}
                     onChange={this.handleDateTimeChange}
+                    ampm={false}
                     KeyboardButtonProps={{
                         'aria-label': 'date time picker',
                     }}

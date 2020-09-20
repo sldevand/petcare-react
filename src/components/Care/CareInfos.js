@@ -39,7 +39,7 @@ class CareInfos extends React.Component {
                     </Grid>
                     <Grid item>
                         <Typography variant="body" color="inherit" >
-                            {DateHelper.toLocaleDateTimeString(careData.appointmentDate)}
+                            {DateHelper.toLocaleDateTimeString(careData.appointmentDate, 'fr-FR')}
                         </Typography>
                     </Grid>
                 </Grid>

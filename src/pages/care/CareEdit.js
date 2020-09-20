@@ -9,7 +9,8 @@ class CareEdit extends React.Component {
         const { success, loggedIn } = this.props;
 
         if (success || !loggedIn) {
-            this.props.history.push(`/`);
+            const { name } = this.props.match.params;
+            this.props.history.push(`/care/${name}`);
         }
 
         return (

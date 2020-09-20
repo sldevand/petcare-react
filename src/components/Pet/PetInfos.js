@@ -55,7 +55,7 @@ class PetInfos extends React.Component {
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             {DateHelper.getAge(dob)} Years old <br/>
-                            Born in {DateHelper.getDateOnly(dob)}
+                            Born in {DateHelper.getDateOnly(dob, 'fr-FR')}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

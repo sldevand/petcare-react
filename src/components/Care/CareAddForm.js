@@ -5,9 +5,9 @@ import Button from '@material-ui/core/Button';
 import FormWrapper from '../Form/FormWrapper';
 import SimpleBackdrop from '../Loader/SimpleBackdrop';
 import { careActions } from '../../redux';
-import UserForm from '../Form/AbstractForm';
+import AbstractForm from '../Form/AbstractForm';
 
-class CareAddForm extends UserForm {
+class CareAddForm extends AbstractForm {
 
     state = {
         title: '',
