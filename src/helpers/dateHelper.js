@@ -1,9 +1,13 @@
 class DateHelper {
     static getAge(dobStr) {
+        return Math.floor(this.getDiff(dobStr) / (1000 * 60 * 60 * 24 * 365.25));
+    }
+
+    static getDiff(dateStr) {
         let now = new Date();
-        let dob = new Date(dobStr);
-        var diff = now.getTime() - dob.getTime();
-        return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+        let dob = new Date(dateStr);
+
+        return now.getTime() - dob.getTime();
     }
 
     static getDateOnly(dobStr, lang = 'en-US') {
@@ -30,6 +34,10 @@ class DateHelper {
         }
 
         return dateFormat;
+    }
+
+    static now() {
+        return new Date();
     }
 }
 

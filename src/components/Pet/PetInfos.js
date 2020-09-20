@@ -7,6 +7,8 @@ import { petActions } from '../../redux';
 import SimpleBackdrop from './../Loader/SimpleBackdrop';
 import DateHelper from '../../helpers/dateHelper';
 import { Link } from 'react-router-dom';
+import Box from '@material-ui/core/Box';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 
 const styles = theme => ({
     wrapper: {
@@ -21,8 +23,8 @@ const styles = theme => ({
 
     },
     media: {
-        height: "240px",
-        borderRadius: 5
+        maxWidth: "350px",
+        maxHeight: "350px"
     },
 });
 
@@ -40,27 +42,32 @@ class PetInfos extends React.Component {
         return (
             <React.Fragment>
                 <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image={image || ''}
-                        title={name}
-                        component="img"
-                    />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             {name}
                         </Typography>
-                        <Typography gutterBottom variant="h6" component="h6">
+                        <Typography  >
                             {specy}
                         </Typography>
+                    </CardContent>
+                    <Box display="flex" justifyContent="center">
+                        <CardMedia
+                            className={classes.media}
+                            image={image || ''}
+                            title={name}
+                            component="img"
+                        />
+                    </Box>
+                    <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {DateHelper.getAge(dob)} Years old <br/>
-                            Born in {DateHelper.getDateOnly(dob, 'fr-FR')}
+                            Born in {DateHelper.getDateOnly(dob, 'fr-FR')}, {DateHelper.getAge(dob)} Years old
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary" component={Link} to={`/care/${name}`}>See Cares</Button>
+                    <Button size="large" color="primary" component={Link} to={`/care/${name}`}>
+                        <LocalHospitalIcon color="secondary"/><Typography>Cares</Typography>
+                    </Button>
                 </CardActions>
                 <SimpleBackdrop open={loading} />
             </React.Fragment>

@@ -7,6 +7,10 @@ import { List, Divider, CircularProgress, Grid, Typography } from '@material-ui/
 import { careActions } from '../../redux';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import CareItem from './CareItem';
+import Box from '@material-ui/core/Box';
+import DateHelper from '../../helpers/dateHelper';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 const useStyles = theme => ({
     root: {
@@ -19,6 +23,10 @@ const useStyles = theme => ({
     cardContent: {
         margin: theme.spacing(3, 2),
     },
+    wrapIcon: {
+        verticalAlign: 'middle',
+        display: 'inline-flex'
+    }
 });
 
 class CareList extends React.Component {
@@ -28,11 +36,11 @@ class CareList extends React.Component {
     }
 
     createItems(caresData) {
-        if (Object.keys(caresData).length === 0) {
+        if (Object.keys(caresData).length <= 0) {
             return [];
         }
         const { name } = this.props.routeMatch.params;
-     
+
         return Object.keys(caresData).map((index) => {
             const care = caresData[index];
             let divider = (index < caresData.length - 1)
@@ -41,40 +49,67 @@ class CareList extends React.Component {
 
             return (
                 <React.Fragment key={care.id + "_frag"}>
-                    <CareItem key={care.id} id={care.id} title={care.title} petName={name} appointmentDate={care.appointmentDate}/>
+                    <CareItem key={care.id} id={care.id} title={care.title} petName={name} appointmentDate={care.appointmentDate} />
                     {divider}
                 </React.Fragment>
             )
         })
     }
 
-    createContent(loading, cares) {
+    createContent() {
+        const { caresData, success, loading, classes } = this.props;
+        if (loading) {
+            return <Box display="flex" justifyContent="center">
+                <CircularProgress />
+            </Box>
+        }
 
-        return (loading)
-            ? <CircularProgress />
-            : (cares.length > 0)
-                ? <List>
-                    {cares}
+        if (success && caresData.length > 0) {
+            let pastCaresData = caresData.filter((care) => {
+                return DateHelper.getDiff(care.appointmentDate) > 0;
+            });
+
+            let nextCaresData = caresData.filter((care) => {
+                return DateHelper.getDiff(care.appointmentDate) <= 0;
+            });
+
+
+            console.log(pastCaresData, nextCaresData)
+
+            let pastCares = this.createItems(pastCaresData);
+            let nextCares = this.createItems(nextCaresData);
+
+            return <React.Fragment>
+                <Typography className={classes.wrapIcon} >
+                    <NavigateNextIcon color="secondary" /> Next Cares
+                </Typography>
+                <List>
+                    {nextCares}
                 </List>
-                : <h5>You have no cares, click on the + button to add one</h5>
+                <Typography className={classes.wrapIcon}>
+                    <NavigateBeforeIcon color="primary" /> Past Cares
+                    </Typography>
+                <List>
+                    {pastCares}
+                </List>
+            </React.Fragment>
+        }
+
+        return <h5>You have no cares, click on the + button to add one</h5>
     }
 
     render() {
-        const { caresData, success, loading, classes } = this.props;
+        const { classes } = this.props;
         const { name } = this.props.routeMatch.params;
-        let cares = [];
-        if (success) {
-            cares = this.createItems(caresData);
-        }
 
-        let content = this.createContent(loading, cares);
+        let content = this.createContent();
 
         return (
             <GridPaper>
                 <div className={classes.root}>
                     <div className={classes.cardTitle}>
                         <Grid container direction="row" justify="flex-start" alignItems="center" spacing={2}>
-                            <Grid item>                                
+                            <Grid item>
                                 <LocalHospitalIcon fontSize="large" color="secondary" />
                             </Grid>
                             <Grid item>
